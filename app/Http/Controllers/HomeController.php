@@ -41,5 +41,10 @@ class HomeController extends Controller
         return view('show');
     }
 
+    public function test()
+    {
+        return null;
+    }
+
 
 }
