@@ -16,8 +16,8 @@ class CreatePaymentInfosTable extends Migration
         Schema::create('payment_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id')->unsigned();
-            $table->string('payment_type');
-            $table->string('sender_no');
+            $table->string('payment_type')->nullable();
+            $table->string('sender_no')->nullable();
             $table->timestamps();
 
             $table->foreign('student_id')

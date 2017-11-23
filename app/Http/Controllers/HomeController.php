@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\InfoStoreRequest;
+use App\Traits\ImageUpload;
 use App\Student;
+
 
 class HomeController extends Controller
 {
-    private $student = null;
-    private $request = null;
+    use ImageUpload;
+	private $student = null;
 
-    public function __construct(Student $student, Request $request)
+    public function __construct(Student $student)
     {
     	$this->student = $student;
-    	$this->request = $request;
     }
-
 
     public function index()
     {
@@ -31,20 +31,16 @@ class HomeController extends Controller
     	return response()->json($data, 200);
     }
 
-    public function storeStudentInfo(Request $request)
+    public function storeStudentInfo(InfoStoreRequest $request)
     {
-    	return $request->all();
+	    if ($request->file('avatar')) {
+	    	$avatarLink = $this->getImageLink($request['avatar']);
+	    }
+	    
+	    $request->merge([
+	    	'image' => $avatarLink
+	    ]);
+	    
+	    return $request->all();
     }
-
-    public function showinfo()
-    {
-        return view('show');
-    }
-
-    public function test()
-    {
-        return null;
-    }
-
-
 }
