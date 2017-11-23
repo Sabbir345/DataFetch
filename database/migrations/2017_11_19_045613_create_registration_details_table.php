@@ -19,6 +19,7 @@ class CreateRegistrationDetailsTable extends Migration
             $table->string('profession')->nullable();
             $table->string('designation')->nullable();
             $table->string('passed_division')->nullable();
+            $table->string('passed_year')->nullable();
             $table->string('residential_status')->nullable();
             $table->timestamps();
 

@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InfoStoreRequest;
+use App\Traits\storeStudentInfo;
 use App\Traits\ImageUpload;
+use App\RegistrationDetail;
 use App\Student;
+use App\Address;
+
 
 
 class HomeController extends Controller
 {
-    use ImageUpload;
-	private $student = null;
+	use ImageUpload, storeStudentInfo;
 
-    public function __construct(Student $student)
-    {
-    	$this->student = $student;
-    }
 
     public function index()
     {
@@ -24,7 +23,7 @@ class HomeController extends Controller
 
     public function getStudentInfo($rollNumber)
     {
-    	$data = $this->student
+    	$data = (new Student)
 	    			 ->where('roll_number', $rollNumber)
 	    			 ->with('address')->get();
 
@@ -33,14 +32,17 @@ class HomeController extends Controller
 
     public function storeStudentInfo(InfoStoreRequest $request)
     {
-	    if ($request->file('avatar')) {
-	    	$avatarLink = $this->getImageLink($request['avatar']);
-	    }
-	    
-	    $request->merge([
-	    	'image' => $avatarLink
-	    ]);
-	    
-	    return $request->all();
-    }
+		if ($request->file('image')) {
+			$avatar = $this->getImageLink($request['image']);
+			$request->merge( ['avatar' => $avatar] );
+		}
+		
+		
+		$this->saveStudent($request);
+		$this->savePaymentInfo($request);
+		$this->saveStudentAddress($request);
+		$this->saveRegistrationDetail($request);
+
+		return "Information Saved Successfully!";
+	}
 }
