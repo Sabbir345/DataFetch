@@ -20,6 +20,7 @@ class CreateRegistrationDetailsTable extends Migration
             $table->string('designation');
             $table->string('passed_division');
             $table->string('residential_status');
+            $table->string('student_type')
             $table->timestamps();
 
              $table->foreign('student_id')
