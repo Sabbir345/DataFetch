@@ -16,9 +16,10 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id')->unsigned();
-            $table->string('village_name');
-            $table->string('upozilla_name');
-            $table->string('post_office');
+            $table->string('village_name')->nullable();
+            $table->string('upozilla_name')->nullable();
+            $table->string('post_office')->nullable();
+            $table->string('district')->nullable();
             $table->timestamps();
 
             $table->foreign('student_id')
