@@ -37,6 +37,10 @@ class HomeController extends Controller
 	    	$avatarLink = $this->getImageLink($request['avatar']);
 	    }
 	    
-	    return $avatarLink;
+	    $request->merge([
+	    	'image' => $avatarLink
+	    ]);
+	    
+	    return $request->all();
     }
 }

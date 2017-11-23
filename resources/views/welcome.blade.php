@@ -36,7 +36,7 @@
         <input type="text" 
         placeholder = "Full Name"
         v-model="studentInfo.name"
-        name="name" disabled
+        name="name" readonly
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -44,7 +44,7 @@
         <input type="text" 
         placeholder="Father's Name"
         v-model="studentInfo.father_name"
-        name="father_name" disabled
+        name="father_name" readonly
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -52,7 +52,7 @@
         <input type="text" 
         placeholder="Village"
         v-model="studentAddress.village_name" 
-        name="village_name" disabled
+        name="village_name" readonly
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -60,7 +60,7 @@
         <input type="text" 
         placeholder="Post Office"
         v-model="studentAddress.post_office"
-        name="post_office" disabled
+        name="post_office" readonly
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -68,7 +68,7 @@
         <input type="text" 
         placeholder="Upozila"
         v-model="studentAddress.upozilla_name"
-        name="upozilla_name" disabled
+        name="upozilla_name" readonly
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -76,7 +76,7 @@
         <input type="text" 
         placeholder="District"
         v-model="studentAddress.district"
-        name="district" disabled
+        name="district" readonly
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -164,7 +164,7 @@
     <div class="row">
       <h4>Payment Details of form fee</h4>
       <div class="input-group">
-        <input type="radio" name="payment-type" value="BKash" id="payment-method-card" checked="true"/>
+        <input type="radio" name="payment_type" value="BKash" id="payment-method-card" checked="true"/>
         <label for="payment-method-card"><span><i class="fa fa-university"></i>Bkash</span></label>
         <input type="radio" name="payment-type" value="Rocket" id="payment-method-paypal"/>
         <label for="payment-method-paypal"> <span><i class="fa fa-space-shuttle"></i>DBBL Rocket</span></label>
