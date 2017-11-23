@@ -16,7 +16,7 @@
   
 <div class="container_custom">
 
-  <h4>Application for Sadis Jamat ${name}</h4>
+  <h4>Application for Sadis Jamat</h4>
 
   <div class="input-group custom-input">
     <input type="number" v-model = "rollNumber"placeholder="Registration ID"/>
@@ -27,8 +27,8 @@
     </button>
   </div>
 
-  <form action="{{route('info.store')}}" method="post" id="darul">
-    <div class="row">
+  <form action="{{route('info.store')}}" method="POST" enctype="multipart/form-data" id="darul">
+      <div class="row">
       
       <input type="hidden" name="_token" value="{{csrf_token()}}">
 
@@ -36,7 +36,7 @@
         <input type="text" 
         placeholder = "Full Name"
         v-model="studentInfo.name"
-        name="name"
+        name="name" disabled
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -44,15 +44,15 @@
         <input type="text" 
         placeholder="Father's Name"
         v-model="studentInfo.father_name"
-        name="father_name"
+        name="father_name" disabled
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       <div class="input-group input-group-icon">
         <input type="text" 
         placeholder="Village"
-        v-model="studentAddress.village_name"
-        name="village_name"
+        v-model="studentAddress.village_name" 
+        name="village_name" disabled
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -60,7 +60,7 @@
         <input type="text" 
         placeholder="Post Office"
         v-model="studentAddress.post_office"
-        name="post_office"
+        name="post_office" disabled
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -68,7 +68,7 @@
         <input type="text" 
         placeholder="Upozila"
         v-model="studentAddress.upozilla_name"
-        name="upozilla_name"
+        name="upozilla_name" disabled
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -76,7 +76,7 @@
         <input type="text" 
         placeholder="District"
         v-model="studentAddress.district"
-        name="district"
+        name="district" disabled
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
@@ -89,7 +89,7 @@
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       <div class="input-group input-group-icon">
-        <input type="number" 
+        <input type="text" 
         name="phone_personal" 
         placeholder="Personal Phone"
         v-model="studentInfo.phone_personal"
@@ -113,7 +113,7 @@
           <input type="text" 
           placeholder="Date of Birth"
           v-model="studentInfo.d_o_b"
-          name="d_o_b" 
+          name="d_o_b" disabled
           />
         </div>
     </div>
@@ -178,7 +178,7 @@
       </div>
       <div class="col-half">
       <div class="input-group input-group-icon">
-        <input type="file" name="pic" accept="image/*">
+        <input type="file" name="avatar">
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
       </div>
@@ -249,18 +249,14 @@
             .then(function (response) {
               that.studentInfo = response.data[0];
               that.studentAddress = response.data[0].address;
-              console.log(that.studentAddress);
+              console.log(that.studentInfo);
             })
             .catch(function (error) {
               console.log(error);
             });
           }
-        },
-
-        mounted() {
-          //this.fetchData();
         }
-
+        
       });
 
   </script>

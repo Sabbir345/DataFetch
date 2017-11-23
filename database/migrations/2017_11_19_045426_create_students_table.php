@@ -17,12 +17,12 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->integer('roll_number');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('d_o_b');
             $table->string('father_name');
-            $table->string('phone_personal');
-            $table->string('phone_home');
-            $table->string('avatar');
+            $table->string('phone_personal')->nullable();
+            $table->string('phone_home')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }
