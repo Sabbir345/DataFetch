@@ -97,6 +97,7 @@
         >
         <div class="input-icon"><i class="fa fa-user"></i></div>`
       </div>
+      
        <div class="input-group input-group-icon">
         <input type="email" 
         placeholder="Email Adress"
@@ -128,9 +129,13 @@
         </div>
       </div>
       <div class="col-half">
-        <h4>Class/Designation</h4>
+        <h4>Student Type</h4>
         <div class="input-group">
-        <input type="text" name="designation" placeholder="Type here" />
+         <select name="studenttype" form="carform">
+            <option value="regular">Regular</option>
+            <option value="improvement">Improvement</option>
+            <option value="female">Female</option>
+        </select>
         </div>
       </div>
     </div>
@@ -143,6 +148,12 @@
             <option value="Second">Second</option>
             <option value="Third">Third</option>
         </select>
+        </div>
+      </div>
+      <div class="col-half">
+        <h4>Class/Designation</h4>
+        <div class="input-group">
+        <input type="text" name="designation" placeholder="Type here" />
         </div>
       </div>
       <div class="col-half">
