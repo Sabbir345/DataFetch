@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Http\Requests\InfoStoreRequest;
+use Illuminate\Http\Request;
 use App\RegistrationDetail;
 use App\PaymentInfo;
 use App\Address;
@@ -28,78 +28,76 @@ trait storeStudentInfo {
 
 	private $registrationData = [
         'student_id', 
-        'profession', 
+        'profession',
+        'student_type',
         'designation', 
         'passed_division',
         'passed_year',
         'residential_status'
     ];
 
-    private $paymentInfo = [
+    private $paymentData = [
         'student_id',
         'payment_type',
         'sender_no'
     ];
 
     
-    public function saveRegistrationDetail(InfoStoreRequest $data)
-	{   
+    public function saveRegistrationDetail(Request $data)
+	{
         $registration = (new RegistrationDetail)
-                        ->where('student_id', $data['id'])
-                        ->get();
-
-		$registration->fill(
-            $data->only(
-                $this->registrationData
-            )
+                        ->where('student_id', $data['student_id'])
+                        ->first();
+        if($registration == null) {
+            $registration = (new RegistrationDetail);
+        }
+        $registration->fill(
+           $data->only($this->registrationData)
         );
-        
-		$registration->save();
+        $registration->save();
 	}
 
-	public function saveStudentAddress(InfoStoreRequest $data)
+	public function saveStudentAddress(Request $data)
 	{
         $address = (new Address)
-                    ->where('student_id', $data['id'])
-                    ->get();
-        
-
+                    ->where('student_id', $data['student_id'])
+                    ->first();
+        if($address == null) {
+            $address = (new Address);
+        }
 		$address->fill(
             $data->only(
                 $this->addressData
             )
         );
-
-		$address->save();
+        $address->save();
 	}
 	
-	public function saveStudent(InfoStoreRequest $data)
+	public function saveStudent(Request $data)
 	{
-        $student = (new Student)
+	    $student = (new Student)
                     ->find($data['student_id']);
-
 		$student->fill(
             $data->only(
                 $this->studentData
             )
         );
-
 		$student->save();
     }
     
-    public function savePaymentInfo(InfoStoreRequest $data)
+    public function savePaymentInfo(Request $data)
     {
-        $payment = (new PaymentInfo)
-                    ->where('student_id', $data['id'])
-                    ->get();
-        
-
-        $payment->fill(
+        $paymentInfo = (new PaymentInfo)
+                        ->where('student_id', $data['student_id'])
+                        ->first();
+        if($paymentInfo == null) {
+            $paymentInfo = (new PaymentInfo);
+        }
+        $paymentInfo->fill(
             $data->only(
-                $this->paymentInfo
+                $this->paymentData
             )
         );
-
-        $payment->save();
+        $paymentInfo->save();
     }
 }
