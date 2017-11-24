@@ -121,9 +121,9 @@
     </div>
     <div class="row">
       <div class="col-half">
-        <h4>Proffesion</h4>
+        <h4>Profesion</h4>
         <div class="input-group">
-         <select name="proffession">
+         <select name="profession">
             <option value="Student" selected>Student</option>
             <option value="Teacher">Teacher</option>
          </select>
@@ -167,7 +167,7 @@
         <h4>Residencial Status</h4>
         <div class="input-group">
          <select name="residential_status">
-            <option value="Residential">Residencial</option>
+            <option value="Residential" selected>Residencial</option>
             <option value="Non-Residential">Non-Residencial</option>
         </select>
         </div>
@@ -256,7 +256,6 @@
         methods: {
           fetchStudentInfo: function() {
             var that = this;
-
             axios.get('student/info/'+that.rollNumber)
             .then(function (response) {
               that.studentInfo = response.data[0];

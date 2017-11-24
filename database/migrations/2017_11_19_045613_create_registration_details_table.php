@@ -17,6 +17,7 @@ class CreateRegistrationDetailsTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->string('profession')->nullable();
+            $table->string('student_type')->nullable();
             $table->string('designation')->nullable();
             $table->string('passed_division')->nullable();
             $table->string('passed_year')->nullable();
