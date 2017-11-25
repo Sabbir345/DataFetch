@@ -31,6 +31,7 @@
       <div class="row">
       
       <input type="hidden" name="_token" value="{{csrf_token()}}">
+      <input type="hidden" name="student_id" v-model="studentInfo.id">
 
       <div class="input-group input-group-icon">
         <input type="text" 
@@ -114,27 +115,27 @@
           <input type="text" 
           placeholder="Date of Birth"
           v-model="studentInfo.d_o_b"
-          name="d_o_b" disabled
+          name="d_o_b" readonly
           />
         </div>
     </div>
     <div class="row">
       <div class="col-half">
-        <h4>Proffesion</h4>
+        <h4>Profesion</h4>
         <div class="input-group">
-         <select name="proffesion" form="carform">
-            <option value="Student">Student</option>
+         <select name="profession">
+            <option value="Student" selected>Student</option>
             <option value="Teacher">Teacher</option>
-        </select>
+         </select>
         </div>
       </div>
       <div class="col-half">
         <h4>Student Type</h4>
         <div class="input-group">
-         <select name="studenttype" form="carform">
-            <option value="regular">Regular</option>
-            <option value="improvement">Improvement</option>
-            <option value="female">Female</option>
+         <select name="student_type">
+            <option value="Regular" selected>Regular</option>
+            <option value="Improvement">Improvement</option>
+            <option value="Female">Female</option>
         </select>
         </div>
       </div>
@@ -143,8 +144,8 @@
       <div class="col-half">
         <h4>Khamis Devision </h4>
         <div class="input-group">
-         <select name="passed_division" form="carform">
-            <option value="First">First</option>
+         <select name="passed_division">
+            <option value="First" selected>First</option>
             <option value="Second">Second</option>
             <option value="Third">Third</option>
         </select>
@@ -165,9 +166,9 @@
       <div class="col-half">
         <h4>Residencial Status</h4>
         <div class="input-group">
-         <select name="residential_status" form="carform">
-            <option value="Yes">Residencial</option>
-            <option value="No">Non-Residencial</option>
+         <select name="residential_status">
+            <option value="Residential" selected>Residencial</option>
+            <option value="Non-Residential">Non-Residencial</option>
         </select>
         </div>
       </div>
@@ -177,7 +178,7 @@
       <div class="input-group">
         <input type="radio" name="payment_type" value="BKash" id="payment-method-card" checked="true"/>
         <label for="payment-method-card"><span><i class="fa fa-university"></i>Bkash</span></label>
-        <input type="radio" name="payment-type" value="Rocket" id="payment-method-paypal"/>
+        <input type="radio" name="payment_type" value="Rocket" id="payment-method-paypal"/>
         <label for="payment-method-paypal"> <span><i class="fa fa-space-shuttle"></i>DBBL Rocket</span></label>
       </div>
       <div class="input-group input-group-icon">
@@ -189,7 +190,7 @@
       </div>
       <div class="col-half">
       <div class="input-group input-group-icon">
-        <input type="file" name="avatar">
+        <input type="file" name="image">
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
       </div>
@@ -255,12 +256,10 @@
         methods: {
           fetchStudentInfo: function() {
             var that = this;
-
             axios.get('student/info/'+that.rollNumber)
             .then(function (response) {
               that.studentInfo = response.data[0];
               that.studentAddress = response.data[0].address;
-              console.log(that.studentInfo);
             })
             .catch(function (error) {
               console.log(error);
