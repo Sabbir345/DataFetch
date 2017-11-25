@@ -16,3 +16,4 @@ Route::get('/student/info/{rollNumber}', 'HomeController@getStudentInfo')->name(
 
 Route::post('/student/info/store', 'HomeController@storeStudentInfo')->name('info.store');
 Route::post('/test' , 'HomeController@showinfo')->name('test');
+
