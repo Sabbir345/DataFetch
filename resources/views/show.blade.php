@@ -7,32 +7,44 @@
 <body>
 
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2" style="margin-top:100px;">
-				<div class="col-md-12">
-					<div class="col-md-2">
-						<img src="http://visitourpage.com/wp-content/uploads/2014/09/250x250.png" style="height:50px;width:50px;">
+		<div class="container" style="margin-top:100px;">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="col-md-1">
+						<img src={{ asset('img/logo.png') }} style="height:80px;width:80px;">
 					</div>
-					<div class="col-md-10">
-						<h3>Darul Kirat Mojidiya Fultoli Trust,Fultoli Shaheb Bari,Jokigonj, Sylhet</h3>
+					<div class="col-md-11">
+						<h3> Darul Kirat Mojidiya Fultoli Trust,Fultoli Shaheb Bari,Jokigonj, Sylhet</h3>
 					</div>
 				</div>
 				<div class="col-md-12">
-					<div class="col-md-10 col-md-offset-1">
-						<h4 class="text-center">Admit Card</h4>
-						<img src="http://visitourpage.com/wp-content/uploads/2014/09/250x250.png" class="pull-right" style="height:50px;width:50px;">
+					<div class="col-md-10 col-md-offset-1 clearfix">
+						<h4 style="margin-left: 3rem;">Admit Card</h4>
+						<img src="http://lorempixel.com/300/300/" class="pull-right" style="height:80px;width:80px;margin-right: 100px;margin-top: -41px;">
 					</div>
-					<div class="col-md-10 col-md-offset-1" style="margin-top:30px;">
-						<p class="pull-left">Year : 2018</p>
-						<p class="pull-right">Jamat : Chadis</p>
-						<br>
-						<br>
+				</div>
+				<div class="col-md-10 col-md-offset-1">
+					<div class="col-md-6" >
+						<p>Year : 2018</p>
+						<p>Name : Sabbir Ahmad</p>
 					</div>
-					<div class="col-md-10 col-md-offset-1">
-						<p>Name : </p>
-						<p>Father Name:</p>
-						<p>Roll :</p> <p>Porik :</p>
-						<p>Student Type :</p>
+					<div class="col-md-5" >
+						<p>Jamat : Chadis</p>
+						<p>Father Name: Monsur Alom</p>
 					</div>
+				</div>
+				<div class="col-md-10 col-md-offset-1">
+					<div class="col-md-4" >
+						<p>Roll: 123456789</p>
+					</div>
+					<div class="col-md-2" >
+					    <p>Porik : 5</p>
+					</div>
+					<div class="col-md-6" >
+					     <p>Student Type : Regular</p>
+					</div>
+					
+					
+					
 				</div>
 		</div>
 	</div>
