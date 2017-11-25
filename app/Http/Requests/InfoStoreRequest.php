@@ -24,7 +24,22 @@ class InfoStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => 'required|image',
+            
+            'email' => 'required|email|unique:students,email',
+            'image' => 'required|mimes:jpeg,bmp,png,jpg|image',
+            'phone_personal' => 'required',
+            'phone_home' => 'required',
+
+            'profession' => 'required',
+            'student_type' => 'required',
+            'designation' => 'required',
+            'passed_division' => 'required',
+            'passed_year' => 'required',
+            'residential_status' => 'required',
+
+            'payment_type' => 'required',
+            'sender_no' => 'required',
+
         ];
     }
 
@@ -36,8 +51,8 @@ class InfoStoreRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'image.required' => 'The image is required!',
-			'image.image'    => 'Image format is not supported!'
+			'image.required' => 'The image is required',
+            'image.image'    => 'Image format is not supported!',
 		];
 	}
 }
