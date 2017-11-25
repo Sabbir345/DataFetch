@@ -18,14 +18,39 @@
 
   <h4>Application for Sadis Jamat</h4>
 
+  @if (count($errors) > 0)
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li style="color: red;">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
+
   <div class="input-group custom-input">
-    <input type="number" v-model = "rollNumber"placeholder="Registration ID"/>
-    <button 
-      type="submit" 
-      @click="fetchStudentInfo"
-      >Submit
-    </button>
+    <form method="post" action="{{ route('test') }}">
+      
+      <input type="number" name="student_id" :value = "rollNumber" v-model = "rollNumber" placeholder="Registration ID"/>
+      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+      
+      <button 
+        @click.prevent="fetchStudentInfo"
+        >Submit
+      </button>
+
+      <button 
+        type="submit" 
+        >Get Admit Card
+      </button>
+    </form>
   </div>
+
+  <!-- <form method="post" action="{{ route('test') }}">
+    <input type="text" name="student_id" placeholder="Enter Student ID">
+    
+    <button type="submit">Get Admit Card</button>
+  </form> -->
 
   <form action="{{route('info.store')}}" method="POST" enctype="multipart/form-data" id="darul">
       <div class="row">
@@ -251,6 +276,7 @@
           rollNumber: '',
           studentInfo : {},
           studentAddress: {},
+          errorMessage: {},
         },
 
         methods: {
@@ -262,7 +288,7 @@
               that.studentAddress = response.data[0].address;
             })
             .catch(function (error) {
-              console.log(error);
+              alert('Wrong Student ID or Student Not Found!');
             });
           }
         }
