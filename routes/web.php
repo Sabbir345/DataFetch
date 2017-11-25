@@ -15,5 +15,5 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/student/info/{rollNumber}', 'HomeController@getStudentInfo')->name('get-student-info');
 
 Route::post('/student/info/store', 'HomeController@storeStudentInfo')->name('info.store');
-Route::post('/test' , 'HomeController@showinfo')->name('test');
+Route::post('/admit-card' , 'HomeController@getAdmitCard')->name('admit-card');
 

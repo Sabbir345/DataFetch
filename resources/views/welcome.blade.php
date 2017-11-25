@@ -29,9 +29,9 @@
   @endif
 
   <div class="input-group custom-input">
-    <form method="post" action="{{ route('test') }}">
+    <form method="post" action="{{ route('admit-card') }}">
       
-      <input type="number" name="student_id" :value = "rollNumber" v-model = "rollNumber" placeholder="Registration ID"/>
+      <input type="number" name="roll_number" v-model = "rollNumber" placeholder="Registration ID"/>
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       
       <button 
@@ -45,12 +45,6 @@
       </button>
     </form>
   </div>
-
-  <!-- <form method="post" action="{{ route('test') }}">
-    <input type="text" name="student_id" placeholder="Enter Student ID">
-    
-    <button type="submit">Get Admit Card</button>
-  </form> -->
 
   <form action="{{route('info.store')}}" method="POST" enctype="multipart/form-data" id="darul">
       <div class="row">
@@ -281,6 +275,12 @@
 
         methods: {
           fetchStudentInfo: function() {
+
+            if (this.rollNumber == '') {
+              alert('Please Enter Registration ID');
+              return;
+            }
+                
             var that = this;
             axios.get('student/info/'+that.rollNumber)
             .then(function (response) {
@@ -290,6 +290,7 @@
             .catch(function (error) {
               alert('Wrong Student ID or Student Not Found!');
             });
+            
           }
         }
         
