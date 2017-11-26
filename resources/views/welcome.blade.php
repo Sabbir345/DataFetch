@@ -103,7 +103,6 @@
       <div class="input-group input-group-icon">
         <input type="text" 
         placeholder="Home Phone"
-        v-model="studentInfo.phone_home"
         name="phone_home" 
         />
         <div class="input-icon"><i class="fa fa-user"></i></div>
@@ -112,7 +111,6 @@
         <input type="text" 
         name="phone_personal" 
         placeholder="Personal Phone"
-        v-model="studentInfo.phone_personal"
         name="phone_personal" 
         >
         <div class="input-icon"><i class="fa fa-user"></i></div>`
@@ -121,7 +119,6 @@
        <div class="input-group input-group-icon">
         <input type="email" 
         placeholder="Email Adress"
-        v-model="studentInfo.email"
         name="email" 
         />
         <div class="input-icon"><i class="fa fa-envelope"></i></div>
@@ -132,9 +129,8 @@
         <h4>Date of Birth</h4>
         <div class="input-group">
           <input type="text" 
-          placeholder="Date of Birth"
-          v-model="studentInfo.d_o_b"
-          name="d_o_b" readonly
+          placeholder="Date of Birth (DD/MM/YY)"
+          name="d_o_b"
           />
         </div>
     </div>
