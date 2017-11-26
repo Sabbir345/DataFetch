@@ -29,6 +29,7 @@ class InfoStoreRequest extends FormRequest
             'image' => 'required|mimes:jpeg,bmp,png,jpg|image',
             'phone_personal' => 'required',
             'phone_home' => 'required',
+            'd_o_b' => 'required',
 
             'profession' => 'required',
             'student_type' => 'required',
@@ -52,7 +53,8 @@ class InfoStoreRequest extends FormRequest
 	{
 		return [
 			'image.required' => 'The image is required',
-            'image.image'    => 'Image format is not supported!',
+            'image.image'    => 'Image format is not supported',
+            'd_o_b.required'    => 'Date of Birth is required',
 		];
 	}
 }
