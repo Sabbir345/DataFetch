@@ -8,7 +8,7 @@ trait ImageUpload {
 	public function getImageLink($data)
 	{
 		$fileName = strtotime(date('Y-m-d H:i:s')) . "-" . str_replace(' ', '-', $data->getClientOriginalName());
-		$destinationPath = public_path( 'uploads/avatar/' . $fileName );
+		$destinationPath = 'uploads/avatar/' . $fileName;
 		Image::make( $data->getRealPath() )->resize(
 			300,
 			null,
