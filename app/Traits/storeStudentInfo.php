@@ -101,4 +101,5 @@ trait storeStudentInfo {
         );
         $paymentInfo->save();
     }
+    
 }
