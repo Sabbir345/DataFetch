@@ -9,6 +9,7 @@ use App\RegistrationDetail;
 use App\Traits\ImageUpload;
 use App\Traits\AdmitCard;
 use App\Student;
+use PDF;
 
 class HomeController extends Controller
 {
@@ -117,4 +118,20 @@ class HomeController extends Controller
 		$this->saveStudentAddress($request);
 		$this->saveRegistrationDetail($request);
 	}
+
+	public function getAdmitCardPdf($roll_number)
+    {
+        $student = Student::where('roll_number', $roll_number)
+                          ->select('id')
+                          ->first();
+
+        if ($student) {
+            $data = $this->getAdmitCardData($student->id);
+            dd($data);
+            $pdf = PDF::loadView('show', ['data' => $data]);
+            return $pdf->download('admit-card.pdf');
+        } else {
+            dd('got there');
+        }
+    }
 }

@@ -3,7 +3,6 @@
 namespace App\Traits;
 use App\Student;
 use App\RegistrationDetail;
-use App\PaymentInfo;
 
 trait AdmitCard {
 	
@@ -15,7 +14,8 @@ trait AdmitCard {
 		$data = [
 			'admit_card' => $admitCard,
 			'year' => date('Y'),
-			'hall' => $this->getHallNumber()
+			'hall' => $this->getHallNumber(),
+            'student_id' => $admitCard->id
 		];
 
 		if ($admitCard) {

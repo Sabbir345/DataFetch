@@ -64,6 +64,10 @@ font-size: 20px;">Admit Card</span>
 <button style="margin-left: 45%; margin-top: 20px;" type="btn btn-primary">Go Back</button>
  </a>
 
+<a href="{{ route('admit-card.download', 123) }}">
+	<button style="margin-left: 45%; margin-top: 20px;" type="btn btn-primary">Download PDF</button>
+</a>
+
 @else
 
 	<div class="row">
