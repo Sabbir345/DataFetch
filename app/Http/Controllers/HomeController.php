@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InfoStoreRequest;
+use App\Http\Requests\AdmitCardRequest;
 use App\Traits\storeStudentInfo;
+use App\RegistrationDetail;
 use App\Traits\ImageUpload;
 use App\Traits\AdmitCard;
 use App\Student;
-use App\RegistrationDetail;
-use App\PaymentInfo;
-use Illuminate\Http\Request;
-use App\Http\Requests\InfoStoreRequest;
-use App\Http\Requests\AdmitCardRequest;
 
 class HomeController extends Controller
 {
@@ -119,6 +117,4 @@ class HomeController extends Controller
 		$this->saveStudentAddress($request);
 		$this->saveRegistrationDetail($request);
 	}
-
-	
 }
