@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InfoStoreRequest;
+use App\Http\Requests\AdmitCardRequest;
 use App\Traits\storeStudentInfo;
+use App\RegistrationDetail;
 use App\Traits\ImageUpload;
 use App\Traits\AdmitCard;
 use App\Student;
-use App\RegistrationDetail;
-use App\PaymentInfo;
-use Illuminate\Http\Request;
-use App\Http\Requests\InfoStoreRequest;
-use App\Http\Requests\AdmitCardRequest;
+use PDF;
 
 class HomeController extends Controller
 {
@@ -120,5 +119,19 @@ class HomeController extends Controller
 		$this->saveRegistrationDetail($request);
 	}
 
-	
+	public function getAdmitCardPdf($roll_number)
+    {
+        $student = Student::where('roll_number', $roll_number)
+                          ->select('id')
+                          ->first();
+
+        if ($student) {
+            $data = $this->getAdmitCardData($student->id);
+            dd($data);
+            $pdf = PDF::loadView('show', ['data' => $data]);
+            return $pdf->download('admit-card.pdf');
+        } else {
+            dd('got there');
+        }
+    }
 }
