@@ -2,13 +2,80 @@
 <html>
 <head>
 	<style>
-
-	.card {
-		    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-		    transition: 0.3s;
-		    margin-top:100px;
-		    
+		.card{
+				width: 750px;
+				height: 310px;
+				background: #fff;
+				border-radius: 5px;
+				margin: auto;
+				border:1px solid;
 			}
+
+			.head{
+				height: 120px;
+			}
+
+			.logo{
+				float: left;
+				margin-top: 8px;
+				width: 110px;
+			}
+
+			.logo img{
+				height: 100px;
+				width: 100px;
+				float: right;
+				border-radius: 5px;
+			}
+
+			.name{
+				float: left;
+				padding: 20px 25px;
+				width: 470px;
+			}
+
+			.name h2{
+				margin-top: 0;
+			}
+
+			.image{
+				width: 120px;
+				float: left;
+			}
+			.image img{
+				height: 110px;
+				width: 110px;
+				margin-top: 10px;
+				border-radius: 5px;
+			}
+
+			.title{
+				height: 30px;
+			}
+
+			.admitcard p {
+				text-align: center;
+				border: 1px solid;
+				margin: 25px 230px;
+				border-radius: 3px;
+			}
+
+			.content p{
+				margin: 5px 0;
+			}
+
+			.co1{
+				width: 250px;
+				float: left;
+				padding-left: 135px;
+			}
+
+			.co2{
+				width: 250px;
+				float: left;
+				padding-left: 55px;
+			}
+	
 	</style>
 
 	<title></title>
@@ -18,51 +85,48 @@
 		
 @if(isset($data['admit_card']) && $data['student_type'] != '')
 
-<div class="col-md-8 col-md-offset-2 ui card">
-	<div class="col-md-12" style="margin-top: 20px">
-		<div class="col-sm-1">
-			<img src={{ asset('img/logo.png') }} style="height:80px;width:80px;">
-		</div>
-		<div class="col-sm-11">
-			<h3 style="margin-left:15px;"> Darul Kirat Mojidiya Fultoli Trust,Fultoli Shaheb Bari,Jokigonj, Sylhet</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-3" style="padding-top: 55px;">
-				<span style="margin-left:87px;font-weight: bold;">Porik : {{ $data['hall'] }}</span>
+
+<div class="card">
+		<div class="head">
+			<div class="logo">
+				<img src={{ asset('img/logo.png') }}>
 			</div>
-			<div class="col-md-6">
-				<span style="margin-left: 150px;''
-font-size: 20px;">Admit Card</span>
+			<div class="name">
+				<h2>Darul Qirat Majidia Fultali Trust, Fultali Saheb Bari, Zakiganj, Sylhet, Bangladesh</h2>
 			</div>
-			<div class="col-md-3">
-				<img src="{{ $data['admit_card']->avatar }}"  style="height:80px;width:80px;margin-left: 37px;">
+			<div class="image">
+				<img src="{{ $data['admit_card']->avatar }}">
 			</div>
-		</div>
-		
-	</div>
-	<div class="row">
-		<div class="col-md-12" style="margin-bottom: 20px;" >
-			<div class="col-md-10 col-md-offset-1">
-				<div class="col-sm-6" >
-					<p>Year : {{ $data['year'] }}</p>
-					<p>Name : {{ $data['admit_card']->name }}</p>
-					<p>Roll: {{ $data['admit_card']->roll_number }}</p>
-				</div>
-				<div class="col-sm-6" >
-					<p>Jamat : Chadis</p>
-					<p>Father Name: {{ $data['admit_card']->father_name}}</p>
-					<p>Student Type : {{ $data['student_type'] }}</p>
-				</div>
+		</div><!-- head -->
+
+		<div class="title">
+			<div class="admitcard">
+				<p>Admit Card</p>
 			</div>
-		</div>
-	</div>
-</div>
+		</div><!-- title -->
+
+		<div class="content">
+			<div class="co1">
+				<p><b>Farik: {{ $data['hall'] }}</b></p>
+				<p><b>Year:</b> {{ $data['year'] }}</p>
+				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
+				<p><b>{{ $data['admit_card']->roll_number }}</b> 147</p>
+			</div>
+			<div class="co2">
+				<p><b>Jamat:</b> Sadis</p>
+				<p><b>Father Name:</b> {{ $data['admit_card']->father_name}} </p>
+				<p><b>Student Type:</b> {{ $data['student_type'] }}</p>
+			</div>
+		</div><!-- content -->
+	</div><!-- card -->
 
 <a href="{{ route('home') }}"> 
 <button style="margin-left: 45%; margin-top: 20px;" type="btn btn-primary">Go Back</button>
  </a>
+
+<a href="{{ route('admit-card.download', 123) }}">
+	<button style="margin-left: 45%; margin-top: 20px;" type="btn btn-primary">Download PDF</button>
+</a>
 
 @else
 
