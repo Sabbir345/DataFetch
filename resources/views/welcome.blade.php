@@ -33,11 +33,11 @@
     <link href="{{ asset('css/css1/prettyPhoto.css') }}" rel="stylesheet">
 
     <!-- Accordion Start -->
-    <link href="{{ asset('css/css1/accordion/accordion.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/css1/accordion.css') }}" rel="stylesheet">
     <!-- Accordion End -->
 
     <!-- Thumb start -->
-    <link href="{{ asset('css/css1/thumb/og-grid-component.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/css1/og-grid-component.css') }}" rel="stylesheet">
     <!-- Thumb start End -->
    
     <!-- BG Slider
@@ -716,14 +716,14 @@ $( "#announcement_nav" ).click(function() {$(".announcement_sub").slideToggle(0)
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/s/bootstrap.js') }}"></script>
     <!--<script src="./js/jquery-scrollReveal.js" type="text/javascript"></script>-->
     
-    <script src="{{ asset('js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/jquery.bxslider.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/jquery.validate.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/s/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/s/jquery.bxslider.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/s/jquery.validate.js') }}" type="text/javascript"></script>
 
-    <script src="{{ asset('js/placeholder/jquery.placeholder.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/s/jquery.placeholder.js') }}" type="text/javascript"></script>
     <script>
     $(function() {
       $('input, textarea').placeholder({customClass:'my-placeholder'});
@@ -734,13 +734,13 @@ $( "#announcement_nav" ).click(function() {$(".announcement_sub").slideToggle(0)
     </style>
 
     <!-- Flex slider -->
-    <script src="{{ asset('js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('js/s/jquery.flexslider.js') }}"></script>
     <!-- End Flex slider -->
 
-      <script src="{{ asset('js/script.js') }}"></script>
+      <script src="{{ asset('js/s/script.js') }}"></script>
 
       <!-- Mobile Menu -->
-    <script src="{{ asset('js/jquery.mmenu.min.all.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/s/jquery.mmenu.min.all.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
     // $(window).on("function",load(e){
           $('nav#menu').mmenu();
@@ -748,18 +748,18 @@ $( "#announcement_nav" ).click(function() {$(".announcement_sub").slideToggle(0)
     </script>
     <!-- Mobile Menu End -->
     
-    <script src="{{ asset('js/retina.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/s/retina.js') }}" type="text/javascript"></script>
 
     <script type="{{ asset('text/javascript') }}" src="js/bg-slider/jquery.ba-cond.min.js"></script>
     <script type="{{ asset('text/javascript') }}" src="js/bg-slider/jquery.slitslider.js"></script>
     
 
     <!-- Thumb Start -->
-    <script src="{{ asset('js/thumb/grid.js') }}"></script>
+    <script src="{{ asset('js/s/thumb/grid.js') }}"></script>
     <!-- Thumb End -->
 
     <!-- Accordion Start -->
-    <script src="{{ asset('js/accordion/jquery.accordion.source.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('js/s/jquery.accordion.source.js') }}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
 
       $(document).ready(function () {
