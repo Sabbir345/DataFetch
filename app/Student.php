@@ -10,18 +10,7 @@ class Student extends Model
 
     protected $guarded = ['id'];
 
-
     // Relationship of Student table with others
-
-    public function address()
-    {
-    	return $this->hasOne(Address::class);
-    }
-
-    public function paymentInfo()
-    {
-    	return $this->hasOne(PaymentInfo::class);
-    }
 
     public function registrationDetail()
     {

@@ -22,6 +22,8 @@ class CreateRegistrationDetailsTable extends Migration
             $table->string('passed_division')->nullable();
             $table->string('passed_year')->nullable();
             $table->string('residential_status')->nullable();
+	        $table->string('payment_type')->nullable();
+	        $table->string('sender_no')->nullable();
             $table->timestamps();
 
              $table->foreign('student_id')
