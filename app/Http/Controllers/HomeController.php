@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InfoStoreRequest;
 use App\Http\Requests\AdmitCardRequest;
 use App\Traits\storeStudentInfo;
-use App\RegistrationDetail;
 use App\Traits\ImageUpload;
 use App\Traits\AdmitCard;
 use App\Student;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class HomeController extends Controller
@@ -24,7 +24,7 @@ class HomeController extends Controller
     {
     	$data = (new Student)
 					->where('roll_number', $rollNumber)
-					->with('address')->get();
+					->get();
 					
     	return response()->json($data, 200);
     }
@@ -75,10 +75,23 @@ class HomeController extends Controller
 	 * 
 	 * @return $hallNumber
 	 */
-	public function getHallNumber()
+	public function getHallNumber($studentId)
 	{
-		$totalRegisteredStudent = count(RegistrationDetail::all());
-		return $hallNumber = intval($totalRegisteredStudent / 50)+1;
+		$serial = DB::select(
+			"SELECT d.myRowSerial
+			FROM (
+			    SELECT *, @rownum:=@rownum + 1 AS myRowSerial 
+			    FROM registration_details, (SELECT @rownum:=0) AS nothingButSetInitialValue 
+			    where student_type='Regular'
+			) d
+			WHERE d.id =".$studentId.";"
+		);
+
+		$hallNumber = $serial / 50;
+		if ($hallNumber == intval($hallNumber)) { // 2.00 == 2.00
+			return $hallNumber;
+		}
+		return intval($hallNumber)+1;
 	}
 
 
@@ -91,12 +104,10 @@ class HomeController extends Controller
 	 */
 	public function checkIfRegistered($student_id)
 	{
-		$registrationData = Student::with(['registrationDetail', 'paymentInfo'])
+		$student = Student::with('registrationDetail')
 									->find($student_id);
 
-		if ( isset($registrationData->registrationDetail) && 
-			 isset($registrationData->paymentInfo) ) {
-			
+		if (!empty($student->registrationDetail)) {
 			return true;
 		}
 
@@ -114,8 +125,6 @@ class HomeController extends Controller
 	public function storeRegistrationData($request)
 	{
 		$this->saveStudent($request);
-		$this->savePaymentInfo($request);
-		$this->saveStudentAddress($request);
 		$this->saveRegistrationDetail($request);
 	}
 

@@ -14,7 +14,7 @@ trait AdmitCard {
 		$data = [
 			'admit_card' => $admitCard,
 			'year' => date('Y'),
-			'hall' => $this->getHallNumber(),
+			'hall' => $this->getHallNumber($admitCard->id),
             'student_id' => $admitCard->id
 		];
 

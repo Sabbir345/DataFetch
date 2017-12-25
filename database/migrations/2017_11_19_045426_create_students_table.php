@@ -18,11 +18,15 @@ class CreateStudentsTable extends Migration
             $table->integer('roll_number');
             $table->string('name');
             $table->string('email')->nullable();
-            $table->string('d_o_b');
+            $table->string('d_o_b')->nullable();
             $table->string('father_name');
             $table->string('phone_personal')->nullable();
             $table->string('phone_home')->nullable();
             $table->string('avatar')->nullable();
+	        $table->string('village_name');
+	        $table->string('upozilla_name');
+	        $table->string('post_office');
+	        $table->string('district');
             $table->timestamps();
         });
     }
