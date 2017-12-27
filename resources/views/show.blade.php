@@ -85,7 +85,6 @@
 		
 @if(isset($data['admit_card']) && $data['student_type'] != '')
 
-
 <div class="card">
 		<div class="head">
 			<div class="logo">
@@ -110,7 +109,7 @@
 				<p><b>Farik: {{ $data['hall'] }}</b></p>
 				<p><b>Year:</b> {{ $data['year'] }}</p>
 				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
-				<p><b>{{ $data['admit_card']->roll_number }}</b> 147</p>
+                <p><b>Roll Number:</b>{{ $data['admit_card']->roll_number }}</p>
 			</div>
 			<div class="co2">
 				<p><b>Jamat:</b> Sadis</p>

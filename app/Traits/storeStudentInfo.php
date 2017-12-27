@@ -15,7 +15,6 @@ trait storeStudentInfo {
         'phone_personal', 
         'phone_home', 
         'avatar',
-        'student_id',
         'village_name',
         'post_office',
         'upozilla_name',

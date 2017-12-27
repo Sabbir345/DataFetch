@@ -22,11 +22,20 @@ class HomeController extends Controller
 
     public function getStudentInfo($rollNumber)
     {
-    	$data = (new Student)
+    	$studentInfo = (new Student)
 					->where('roll_number', $rollNumber)
-					->get();
-					
-    	return response()->json($data, 200);
+					->first();
+
+    	if(!empty($studentInfo)) {
+            return response()->json(array(
+                'studentInfo' => $studentInfo,
+                'status' => true
+            ), 200);
+        }
+
+        return response()->json(array(
+            'status' => false
+        ), 200);
     }
 
     public function storeStudentInfo(InfoStoreRequest $request)
@@ -87,7 +96,7 @@ class HomeController extends Controller
 			WHERE d.id =".$studentId.";"
 		);
 
-		$hallNumber = $serial / 50;
+		$hallNumber = $serial[0]->myRowSerial / 50;
 		if ($hallNumber == intval($hallNumber)) { // 2.00 == 2.00
 			return $hallNumber;
 		}
@@ -136,8 +145,7 @@ class HomeController extends Controller
 
         if ($student) {
             $data = $this->getAdmitCardData($student->id);
-            dd($data);
-            $pdf = PDF::loadView('show', ['data' => $data]);
+            $pdf = PDF::loadView('admit-card', ['data' => $data]);
             return $pdf->download('admit-card.pdf');
         } else {
             dd('got there');
