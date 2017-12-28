@@ -387,9 +387,7 @@ $( "#announcement_nav" ).click(function() {$(".announcement_sub").slideToggle(0)
 
           <div class="department-section">
             <div class="department-overview">
-              
-              
-              <h4 style="padding-top: 75px;">Application for Sadis Jamat</h4>
+
                 @include('form')
 
             </div><!-- End .department-overview -->

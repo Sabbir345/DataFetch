@@ -67,9 +67,13 @@ class HomeController extends Controller
 							->first();
 
 		if ($student) {
-			// return $data = $this->getAdmitCardData($student->id);
-			 $data = $this->getAdmitCardData($student->id);
-			
+			if (!$this->checkIfRegistered($student->id)) {
+				return view('error')->with([
+					'message' => 'You are not registered!'
+				]);
+			}
+
+			$data = $this->getAdmitCardData($student->id);
 			return view('show')->with('data', $data);
 		}
 		
@@ -139,7 +143,7 @@ class HomeController extends Controller
 
 	public function getAdmitCardPdf($roll_number)
     {
-        $student = Student::where('roll_number', $roll_number)
+    	$student = Student::where('roll_number', $roll_number)
                           ->select('id')
                           ->first();
 
