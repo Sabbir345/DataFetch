@@ -40,7 +40,6 @@ class InfoStoreRequest extends FormRequest
 
             'payment_type' => 'required',
             'sender_no' => 'required',
-
         ];
     }
 
