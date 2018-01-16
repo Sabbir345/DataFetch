@@ -47,7 +47,7 @@
                 <div class="input-group input-group-icon">
                     <input type="text"
                            placeholder="Village"
-                           v-model="studentAddress.village_name"
+                           v-model="studentInfo.village_name"
                            name="village_name" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
@@ -55,7 +55,7 @@
                 <div class="input-group input-group-icon">
                     <input type="text"
                            placeholder="Post Office"
-                           v-model="studentAddress.post_office"
+                           v-model="studentInfo.post_office"
                            name="post_office" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
