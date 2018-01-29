@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InfoStoreRequest;
 use App\Http\Requests\AdmitCardRequest;
+use App\RegistrationDetail;
 use App\Traits\storeStudentInfo;
 use App\Traits\ImageUpload;
 use App\Traits\AdmitCard;
@@ -90,17 +91,22 @@ class HomeController extends Controller
 	 */
 	public function getHallNumber($studentId)
 	{
+		$row = RegistrationDetail::where(['student_id' => $studentId, 'student_type' => 'Regular'])
+			->select('id')->first();
+
+		if(!isset($row)) return 0;
+
 		$serial = DB::select(
 			"SELECT d.myRowSerial
 			FROM (
 			    SELECT *, @rownum:=@rownum + 1 AS myRowSerial 
 			    FROM registration_details, (SELECT @rownum:=0) AS nothingButSetInitialValue 
-			    where student_type='Regular'
+			  	where student_type='Regular'
 			) d
-			WHERE d.id =".$studentId.";"
+			WHERE d.id =".$row->id.";"
 		);
 
-		$hallNumber = $serial[0]->myRowSerial / 50;
+		$hallNumber = $serial[0]->myRowSerial / 55;
 		if ($hallNumber == intval($hallNumber)) { // 2.00 == 2.00
 			return $hallNumber;
 		}

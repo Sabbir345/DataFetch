@@ -106,7 +106,9 @@
 
 		<div class="content">
 			<div class="co1">
+				@if(!empty($data['hall']))
 				<p><b>Farik: {{ $data['hall'] }}</b></p>
+				@endif
 				<p><b>Year:</b> {{ $data['year'] }}</p>
 				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
                 <p><b>Roll Number:</b>{{ $data['admit_card']->roll_number }}</p>
