@@ -117,6 +117,9 @@
 				<p><b>Jamat:</b> Sadis</p>
 				<p><b>Father Name:</b> {{ $data['admit_card']->father_name}} </p>
 				<p><b>Student Type:</b> {{ $data['student_type'] }}</p>
+				@if(isset($data['exam_date']) && !empty($data['exam_date']))
+					<p><b>Exam Date</b> {{ $data['exam_date'] }}</p>
+				@endif
 			</div>
 		</div><!-- content -->
 	</div><!-- card -->
