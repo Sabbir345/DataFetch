@@ -370,9 +370,22 @@ $( "#announcement_nav" ).click(function() {$(".announcement_sub").slideToggle(0)
                 </div>
               </a>
           </div>
-          
-          
         </div>
+        <br>
+<!-- CSV UPLOAD FORM -->
+      <form action="{{route('upload-csv')}}" method="post" enctype="multipart/form-data">
+          Select CSV to upload:
+        <input type="file" name="student_csv" id="student_csv">
+        <input type="submit" value="Upload CSV" name="submit">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+      </form>
+
+       <ol>
+                        @foreach ($errors->all() as $error)
+                            <li style="color: red;">{{ $error }}</li>
+                        @endforeach
+                    </ol>
+
   <a class="left carousel-control" href="#side-nav-carousel" data-slide="prev">
     </a>
    <a class="right carousel-control" href="#side-nav-carousel" data-slide="next">

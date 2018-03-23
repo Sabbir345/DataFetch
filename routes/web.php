@@ -17,3 +17,6 @@ Route::get('/student/info/{rollNumber}', 'HomeController@getStudentInfo')->name(
 Route::post('/student/info/store', 'HomeController@storeStudentInfo')->name('info.store');
 Route::post('/admit-card' , 'HomeController@getAdmitCard')->name('admit-card');
 Route::get('/card/{rollNumber}/pdf', 'HomeController@getAdmitCardPdf')->name('admit-card.download');
+
+
+Route::post('/upload-csv', 'HomeController@getCSVData')->name('upload-csv');
