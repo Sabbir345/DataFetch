@@ -102,6 +102,8 @@
         </div>
     </div><!-- title -->
 
+    <br>
+    
     <div class="content">
         <div class="co1">
             @if(!empty($data['hall']))

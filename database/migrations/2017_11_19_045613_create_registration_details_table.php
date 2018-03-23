@@ -16,6 +16,7 @@ class CreateRegistrationDetailsTable extends Migration
         Schema::create('registration_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id')->unsigned();
+            $table->integer('registration_id')->nullable();
             $table->string('profession')->nullable();
             $table->string('student_type')->nullable();
             $table->string('designation')->nullable();

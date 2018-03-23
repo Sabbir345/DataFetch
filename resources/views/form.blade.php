@@ -147,6 +147,7 @@
                             <option value="Regular" selected>Regular</option>
                             <option value="Improvement">Improvement</option>
                             <option value="Female">Female</option>
+                            <option value="Irregular">Irregular</option>
                         </select>
                     </div>
                 </div>

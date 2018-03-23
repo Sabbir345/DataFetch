@@ -30,13 +30,20 @@ trait storeStudentInfo {
         'passed_year',
         'residential_status',
         'payment_type',
-        'sender_no'
+        'sender_no',
+        'registration_id'
     ];
 
     
     public function saveRegistrationDetail(Request $data)
 	{
         $registration = new RegistrationDetail;
+
+        // Getting how many students are available of this type
+        $particularTypeStudent = $registration->where('student_type', $data['student_type'])->get();
+        $registrationIdofThisStudent = $particularTypeStudent->count();
+
+        $data['registration_id'] = $registrationIdofThisStudent+1; // attaching roll number for that student
 
         $registration->fill(
            $data->only($this->registrationData)
