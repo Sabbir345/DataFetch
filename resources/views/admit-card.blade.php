@@ -4,7 +4,7 @@
     <style>
         .card{
             width: 750px;
-            height: 310px;
+            height: 340px;
             background: #fff;
             border-radius: 5px;
             margin: auto;
@@ -102,16 +102,19 @@
         </div>
     </div><!-- title -->
 
-    <br>
+    <br><br>
     
     <div class="content">
         <div class="co1">
-            @if(!empty($data['hall']))
+            @if(isset($data['hall']) && !empty($data['hall']))
                 <p><b>Farik: {{ $data['hall'] }}</b></p>
             @endif
             <p><b>Year:</b> {{ $data['year'] }}</p>
             <p><b>Name:</b> {{ $data['admit_card']->name }}</p>
             <p><b>Roll Number:</b>{{ $data['admit_card']->roll_number }}</p>
+            @if(isset($data['residential_status']) && !empty($data['residential_status']))
+            <p><b>Residential Status:</b> {{ $data['residential_status'] }}</p>
+            @endif
         </div>
         <div class="co2">
             <p><b>Jamat:</b> Sadis</p>

@@ -23,7 +23,7 @@ trait AdmitCard {
 			$student = RegistrationDetail::where('student_id', $admitCard->id)->first();
 
 			$data['student_type'] = isset($student->student_type) ? $student->student_type : '';
-
+			$data['residential_status'] = $student->residential_status;
 			// attaching exam date 
 			if(isset($student->student_type)) {
 				$data['exam_date'] = $this->getExamDate($student);

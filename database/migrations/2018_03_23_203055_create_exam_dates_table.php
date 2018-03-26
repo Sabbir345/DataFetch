@@ -15,8 +15,8 @@ class CreateExamDatesTable extends Migration
     {
         Schema::create('exam_dates', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('name');
-            $table->date('date');
+            $table->text('name');
+            $table->text('date');
         });
     }
 
