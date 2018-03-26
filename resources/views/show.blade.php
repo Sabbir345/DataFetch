@@ -4,7 +4,6 @@
 	<style>
 		.card{
 				width: 750px;
-				height: 310px;
 				background: #fff;
 				border-radius: 5px;
 				margin: auto;
@@ -60,20 +59,23 @@
 				border-radius: 3px;
 			}
 
+			.content {
+				margin: 10px 20px 10px 20px;
+    			display: flex;
+			}
+
 			.content p{
 				margin: 5px 0;
 			}
 
 			.co1{
-				width: 250px;
-				float: left;
-				padding-left: 135px;
+				width: 50%;
+    			padding-left: 10%;
 			}
 
 			.co2{
-				width: 250px;
-				float: left;
-				padding-left: 55px;
+				width: 50%;
+    			padding-left: 10%
 			}
 	
 	</style>
@@ -106,12 +108,15 @@
 
 		<div class="content">
 			<div class="co1">
-				@if(!empty($data['hall']))
+				@if(isset($data['hall']) && !empty($data['hall']))
 				<p><b>Farik: {{ $data['hall'] }}</b></p>
 				@endif
 				<p><b>Year:</b> {{ $data['year'] }}</p>
 				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
                 <p><b>Roll Number:</b>{{ $data['admit_card']->roll_number }}</p>
+				@if(isset($data['residential_status']) && !empty($data['residential_status']))
+            	<p><b>Residential Status:</b> {{ $data['residential_status'] }}</p>
+            	@endif
 			</div>
 			<div class="co2">
 				<p><b>Jamat:</b> Sadis</p>

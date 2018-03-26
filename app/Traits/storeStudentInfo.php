@@ -10,6 +10,8 @@ use App\Student;
 trait storeStudentInfo {
     
     private $studentData = [
+        'name',
+        'father_name',
         'email',
         'd_o_b',
         'phone_personal', 

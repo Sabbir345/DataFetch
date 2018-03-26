@@ -32,7 +32,7 @@
                     <input type="text"
                            placeholder = "Full Name"
                            v-model="studentInfo.name"
-                           name="name" readonly
+                           name="name"
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -40,7 +40,7 @@
                     <input type="text"
                            placeholder="Father's Name"
                            v-model="studentInfo.father_name"
-                           name="father_name" readonly
+                           name="father_name"
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -48,7 +48,7 @@
                     <input type="text"
                            placeholder="Village"
                            v-model="studentInfo.village_name"
-                           name="village_name" readonly
+                           name="village_name"
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -56,7 +56,7 @@
                     <input type="text"
                            placeholder="Post Office"
                            v-model="studentInfo.post_office"
-                           name="post_office" readonly
+                           name="post_office"
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -64,7 +64,7 @@
                     <input type="text"
                            placeholder="Upozila"
                            v-model="studentInfo.upozilla_name"
-                           name="upozilla_name" readonly
+                           name="upozilla_name"
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -72,7 +72,7 @@
                     <input type="text"
                            placeholder="District"
                            v-model="studentInfo.district"
-                           name="district" readonly
+                           name="district"
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -107,6 +107,7 @@
                     <input type="text"
                            placeholder="Date of Birth (DD/MM/YY)"
                            name="d_o_b"
+                           id="d_o_b" onkeypress="return false;"
                     />
                 </div>
             </div>
@@ -198,7 +199,7 @@
                     <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the <a href="#">privacy & policy<a/>.</label>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" v-show="isFetchedStudent">
                 <div class="col-half">
                     <h4>Submit the details to Admin pannel</h4>
                 </div>
@@ -230,3 +231,13 @@
     </div>
 
 </div>
+
+<script>
+    $(function () {
+        $("#d_o_b").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2005:',
+        });
+    })
+  </script>

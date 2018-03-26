@@ -25,6 +25,13 @@ class InfoStoreRequest extends FormRequest
     {
         return [
             
+            'name' => 'required',
+            'father_name' => 'required',
+            'village_name' => 'required',
+            'post_office' => 'required',
+            'upozilla_name' => 'required',
+            'district' => 'required',
+            
             'email' => 'required|email|unique:students,email',
             'image' => 'required|mimes:jpeg,bmp,png,jpg|image',
             'phone_personal' => 'required',
