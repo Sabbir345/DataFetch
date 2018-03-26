@@ -56,7 +56,8 @@ trait AdmitCard {
 			$dateNumber = 1;
 		}
 
-		$examDate = ExamDate::where('name', 'date_'.$dateNumber)->first();
+		$dateName = strtolower($student->student_type).'_date_'.$dateNumber;
+		$examDate = ExamDate::where('name', $dateName)->first();
 
 		if($examDate) {
 			return $examDate->date;
