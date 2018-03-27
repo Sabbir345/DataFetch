@@ -17,6 +17,8 @@ class CreateExamDatesTable extends Migration
             $table->increments('id');
             $table->text('name');
             $table->text('date');
+            $table->timestamps();
+
         });
     }
 
