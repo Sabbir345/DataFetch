@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InfoStoreRequest;
 use App\Http\Requests\AdmitCardRequest;
-use App\Http\Requests\CSVRequest;
 use App\RegistrationDetail;
 use App\Traits\storeStudentInfo;
 use App\Traits\ImageUpload;
@@ -156,52 +155,4 @@ class HomeController extends Controller
         }
 	}
 	
-
-	/**
-	 * Getting Uploaded CSV data
-	 */
-	public function getCSVData(CSVRequest $request)
-	{
-		$uploadedCsv = $request->file('student_csv');
-		$fileExtension= $uploadedCsv->getClientOriginalExtension();
-
-		if($fileExtension != "csv") {
-			return ["The File Type Must be in csv"];
-		}
-
-		$csvAsArray = array_map('str_getcsv', file($uploadedCsv));
-
-		foreach($csvAsArray as $index => $value) {
-			if($index == 0) continue;
-
-			$data = array(
-				'roll_number' => $value[0],
-				'name' => $value[1],
-				'father_name' => $value[2],
-				'village_name' => $value[3],
-				'district' => $value[4],
-				'upozilla_name' => $value[5],
-				'post_office' => $value[6]
-			);
-
-			$alreadyExistsStudent = Student::where('roll_number', $data['roll_number'])->first();
-			if(empty($alreadyExistsStudent)) {
-				$this->storeStudent($data);
-			}
-		}
-	}
-
-
-	public function storeStudent($data) {
-		$student = new Student;
-		$student->roll_number = $data['roll_number'];
-		$student->name = $data['name'];
-		$student->father_name = $data['father_name'];
-		$student->village_name = $data['village_name'];
-		$student->district = $data['district'];
-		$student->upozilla_name = $data['upozilla_name'];
-		$student->post_office = $data['post_office'];
-
-		$student->save();
-	}
 }
