@@ -2,20 +2,20 @@
 <html lang="en">
 
 
-<!-- Mirrored from www.urbanui.com/salt/jquery/pages/tables/data-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:34:39 GMT -->
+<!-- Mirrored from www.urbanui.com/salt/jquery/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:31:57 GMT -->
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Fultali</title>
   <!-- plugins:css -->
+  <!-- {{ asset('css/css1/bootstrap.css') }} -->
   <link rel="stylesheet" href="{{ asset('css/node_modules/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css') }}">
   <!-- endinject -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
-  <!-- endinject -->
 </head>
 <body class="sidebar-dark">
   <!-- partial:partials/_settings-panel.html -->
@@ -76,19 +76,19 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar navbar-light col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="{{route('admin.dashboard')}}"><img src="{{asset('img/admin/logo.jpg')}}" style="height:50px ;width:50px ;" alt="Logo"></a>
+        <a class="navbar-brand brand-logo" href="{{ route('admin.dashboard') }}"><img src="{{asset('img/admin/logo.jpg')}}" style="height:50px ;width:50px ;" alt="Logo"></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
-
+       
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <a  href="{{route('logout')}}" type="button" class="btn btn-danger" style="margin-left: 85%; text-decoration: none;">Logout</a>
+        
       </div>
     </nav>
     <!-- partial -->
@@ -104,10 +104,10 @@
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
                 <i class="mdi mdi-flag-outline menu-icon"></i>
-                <span class="menu-title">All Student</span>
+                <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
               <div class="collapse" id="validationSubmenu">
@@ -138,7 +138,6 @@
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
-
               <div class="collapse" id="examdate">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
@@ -148,66 +147,48 @@
               </div>
             </li>
             <!--forms end-->
-            <!--forms end-->
           </ul>
         </nav>
         <!-- partial -->
         <div class="content-wrapper">
-          <h1 class="page-title">All Registered Student Data</h1>
+          <h1 class="page-title">Edit Student Data</h1>
           <div class="card">
             <div class="card-body">
-             
               <div class="row">
                 <div class="col-12">
-                  <table   class="table table-bordered" style="width:100%;">
-                    <thead>
-                    <!--
-                      registration_id	int(11) NULL	 
-                          profession	varchar(255) NULL	 
-                          student_type	varchar(255) NULL	 
-                          designation	varchar(255) NULL	 
-                          passed_division	varchar(255) NULL	 
-                          passed_year	varchar(255) NULL	 
-                          residential_status	varchar(255) NULL	 
-                          payment_type	varchar(255) NULL	 
-                          sender_no
-                      -->
-                      <tr>
-                          <th>#</th>
-                          <th>Name</th>
-                          <th>Roll Number</th>
-                          <th>Profession</th>
-                          <th>Student Type</th>
-                          <th>Designation</th>
-                          <th>Passed Year</th>
-                          <th>Passed Division</th>
-                          <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($registeredStudents as $index => $student)
-                      <tr>
-                          <td>{{$index+1}}</td>
-                          <td>{{$student->student->name}}</td>
-                          <td>{{$student->student->roll_number}}</td>
-                          <td>{{$student->profession}}</td>
-                          <td>{{$student->student_type}}</td>
-                          <td>{{$student->designation}}</td>
-                          <td>{{$student->passed_year}}</td>
-                          <td>{{$student->passed_division}}</td>  
-                          <td>
-                            <a href="{{route('admin.getRegisteredStudentShowPage', ['id' => $student->student_id])}}" type="button" class="btn btn-xs btn-primary">View</a>
-                            <a href="{{route('admin.getRegisteredStudentEditPage', ['id' => $student->student_id])}}" type="button" class="btn btn-xs btn-success">Edit</a>
-                            <button class="btn btn-xs btn-danger">Delete</button>
-                          </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-
-                  <div class="pagination" style="float: right; font-size: 20px; border: 1px solid #e9ecef; padding: 10px 10px 0px 10px;">
-                      {{ $registeredStudents->links() }}
-                  </div>
+                  <form class="forms-sample" method="post" action="{{route('admin.generalStudentUpdate')}}">
+                            <div class="form-group">
+                                  <label for="roll_number">Roll Number</label>
+                                  <input type="text" name="roll_number" value="{{ $data['roll_number'] }}" class="form-control p-input" required>
+                             </div>
+                            <div class="form-group">
+                                  <label for="name">Name</label>
+                                  <input type="text" name="name" value="{{ $data['name'] }}" class="form-control p-input" required>
+                                  <input type="hidden" name="id" value="{{ $data['id'] }}">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                             </div>
+                             <div class="form-group">
+                                  <label for="father_name">Father Name</label>
+                                  <input type="text" name="father_name" value="{{ $data['father_name'] }}" class="form-control p-input" required>
+                             </div>
+                             <div class="form-group">
+                                  <label for="village_name">Village</label>
+                                  <input type="text" name="village_name" value="{{ $data['village_name'] }}" class="form-control p-input" required>
+                             </div>
+                             <div class="form-group">
+                                  <label for="post_office">Post Office</label>
+                                  <input type="text" name="post_office" value="{{ $data['post_office'] }}" class="form-control p-input" required>
+                             </div>
+                             <div class="form-group">
+                                  <label for="upozilla_name">Upozila</label>
+                                  <input type="text" name="upozilla_name" value="{{ $data['upozilla_name'] }}" class="form-control p-input" required>
+                             </div>
+                             <div class="form-group">
+                                  <label for="district">District</label>
+                                  <input type="text" name="district" value="{{ $data['district'] }}"  class="form-control p-input" required>
+                             </div>
+                          <button type="submit" class="btn btn-success">Update</button>
+                    </form>
                 </div>
               </div>
             </div>
@@ -218,7 +199,7 @@
         <footer class="footer">
           <div class="container-fluid clearfix">
             <span class="float-right">
-                <a href="#">Fultali Admin</a> &copy; 2017
+                <a href="#">Fultali Admin</a> &copy; 2018
             </span>
           </div>
         </footer>
@@ -232,7 +213,6 @@
 
 
 
-  <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="{{ asset('css/node_modules/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('css/node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
@@ -241,10 +221,8 @@
   <!-- endinject -->
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="{{asset('js/admin/off-canvas.js')}}"></script>
-  <script src="{{asset('js/admin/misc.js')}}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
+  <script src="{{ asset('js/admin/off-canvas.js') }}"></script>
+  <script src="{{ asset('js/admin/misc.js') }}"></script>
   <!-- End custom js for this page-->
 </body>
 
