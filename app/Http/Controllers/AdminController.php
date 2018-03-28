@@ -9,6 +9,8 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\CSVRequest;
+use App\Http\Requests\GeneralStudentEditRequest;
+use App\Http\Requests\RegisteredStudentEditRequest;
 
 class AdminController extends Controller
 {
@@ -72,40 +74,60 @@ class AdminController extends Controller
 
     public function getRegisteredStudentsPage()
     {
-        return view('admin.registered-student');
+        $registeredStudents = RegistrationDetail::with('student')->paginate(50);
+        return view('admin.registered-student', array('registeredStudents' => $registeredStudents));
+    }
+
+    public function getRegisteredStudentShowPage($studentId)
+    {
+        $registeredStudent = RegistrationDetail::where('student_id', $studentId)->with('student')->first();
+        return view('admin.registered-student-show', array('data' => $registeredStudent));
+
+    }
+
+    public function getRegisteredStudentEditPage($studentId)
+    {
+        $registeredStudent = RegistrationDetail::where('student_id', $studentId)->first();
+        return view('admin.registered-student-edit', array('data' => $registeredStudent));
+    }
+
+    public function registeredStudentUpdate(RegisteredStudentEditRequest $request)
+    {
+        $registeredStudent = RegistrationDetail::where('student_id', $request->student_id)->first();
+        foreach ($request->except('_token', 'student_id') as $key => $value) {
+            $registeredStudent->{$key} = $value;
+        }
+        $registeredStudent->save();
+        return redirect()->route('admin.registered-students');
     }
 
     public function getGeneralStudentsPage()
     {
         $generalStudents = Student::paginate(50);
-        // dd($generalStudents[0]->roll_number);
         return view('admin.general-student', array('generalStudents' => $generalStudents));
     }
 
-    public function getStudents()
+    public function getGeneralStudentEditPage($studentId)
     {
-        $students = Student::all();
-        return $students;
+        $generalStudent = Student::find($studentId);
+        return view('admin.general-student-edit', array('data' => $generalStudent));
     }
 
-    public function getRegisteredStudents()
+    public function generalStudentUpdate(GeneralStudentEditRequest $request)
     {
-        $registeredStudents = RegistrationDetail::with('student')->get();
-        dd($registeredStudents);
-    }
+        $student = Student::find($request->id);
+        $student->name = $request->name;
+        $student->father_name = $request->father_name;
+        $student->roll_number = $request->roll_number;
+        $student->post_office = $request->post_office;
+        $student->village_name = $request->village_name;
+        $student->district = $request->district;
+        $student->upozilla_name = $request->upozilla_name;
 
-    public function getSingleStudent($rollNumber)
-    {
-        $student = Student::where('roll_number', $rollNumber)->first();
-        return $student;
-    }
+        $student->save();
 
-    public function getSingleRegisteredStudents($student_id)
-    {
-        $registeredStudent = RegistrationDetail::where('student_id', $student_id)->first();
-        return $registeredStudent;
+        return redirect()->route('admin.general-students');
     }
-
 
     /**
 	 * Getting Uploaded CSV data

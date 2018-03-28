@@ -2,23 +2,20 @@
 <html lang="en">
 
 
-<!-- Mirrored from www.urbanui.com/salt/jquery/pages/tables/data-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:34:39 GMT -->
+<!-- Mirrored from www.urbanui.com/salt/jquery/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:31:57 GMT -->
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Salt Admin</title>
+  <title>Fultali</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../../node_modules/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css">
+  <!-- {{ asset('css/css1/bootstrap.css') }} -->
+  <link rel="stylesheet" href="{{ asset('css/node_modules/mdi/css/materialdesignicons.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css') }}">
   <!-- endinject -->
-  <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css" />
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../css/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.html" />
+  <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
 </head>
 <body class="sidebar-dark">
   <!-- partial:partials/_settings-panel.html -->
@@ -79,17 +76,19 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar navbar-light col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="../../index.html"><img src="../../images/salt_logo.svg" alt="Logo"></a>
+        <a class="navbar-brand brand-logo" href="{{ route('admin.dashboard') }}"><img src="{{asset('img/admin/logo.jpg')}}" style="height:50px ;width:50px ;" alt="Logo"></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
-
+       
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <a  href="{{route('logout')}}" type="button" class="btn btn-danger" style="margin-left: 85%; text-decoration: none;">Logout</a>
+        
       </div>
     </nav>
     <!-- partial -->
@@ -100,21 +99,21 @@
           <ul class="nav">
             <!--main pages start-->
             <li class="nav-item">
-              <a class="nav-link" href="../../index.html">
+              <a class="nav-link" href="{{route('admin.dashboard')}}">
                 <i class="mdi mdi-gauge menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
                 <i class="mdi mdi-flag-outline menu-icon"></i>
-                <span class="menu-title">All Student</span>
+                <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
               <div class="collapse" id="validationSubmenu">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="../../pages/tables/show-student-data.html">Student</a>
+                    <a class="nav-link" href="{{route('admin.general-students')}}">Student</a>
                   </li>
                 </ul>
               </div>
@@ -128,16 +127,7 @@
               <div class="collapse" id="tablesSubmenu">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="../../pages/tables/data-table-regular.html">Regular</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../../pages/tables/data-table-female.html">Female</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../../pages/tables/data-table-irregular.html">Irregular</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../../pages/tables/data-table-improvement.html">Improvement</a>
+                    <a class="nav-link" href="{{route('admin.registered-students')}}">Student List</a>
                   </li>
                 </ul>
               </div>
@@ -148,52 +138,77 @@
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
-
               <div class="collapse" id="examdate">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="../../pages/forms/form-validation.html">Student</a>
+                    <a class="nav-link" href="{{route('exam-dates')}}">Student</a>
                   </li>
                 </ul>
               </div>
             </li>
             <!--forms end-->
-            <!--forms end-->
           </ul>
         </nav>
         <!-- partial -->
         <div class="content-wrapper">
-          <h1 class="page-title">Edit Student Data</h1>
+          <h1 class="page-title">Registered Student Information</h1>
           <div class="card">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
-                  <form class="forms-sample">
+                  <form class="forms-inline" method="post" action="{{route('admin.registeredStudentUpdate')}}">
                             <div class="form-group">
-                                  <label for="femaleexamdate">Name</label>
-                                  <input type="text" value="" class="form-control p-input" id="femaleexamdate" aria-describedby="emailHelp" >
+                                  <label for="profession">Student Name</label>
+                                  <input type="text" name="profession" value="{{ $data->student->name }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="femaleexamdate">Father Name</label>
-                                  <input type="text" value="" class="form-control p-input" id="femaleexamdate" aria-describedby="emailHelp" >
+                                  <label for="profession">Roll Number</label>
+                                  <input type="text" name="profession" value="{{ $data->student->roll_number }}" class="form-control p-input" disabled>
+                             </div>
+                            <div class="form-group">
+                                  <label for="profession">Profession</label>
+                                  <input type="text" name="profession" value="{{ $data['profession'] }}" class="form-control p-input" disabled>
+                             </div>
+                            <div class="form-group">
+                                  <label for="student_type">Student Type</label>
+                                  <input type="text" name="student_type" value="{{ $data['student_type'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="femaleexamdate">Village</label>
-                                  <input type="text" value="" class="form-control p-input" id="femaleexamdate" aria-describedby="emailHelp" >
+                                  <label for="designation">Designation</label>
+                                  <input type="text" name="designation" value="{{ $data['designation'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="femaleexamdate">Post Office</label>
-                                  <input type="text" value="" class="form-control p-input" id="femaleexamdate" aria-describedby="emailHelp" >
+                                  <label for="passed_year">Passed Year</label>
+                                  <input type="text" name="passed_year" value="{{ $data['passed_year'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="femaleexamdate">Upozila</label>
-                                  <input type="text" value="" class="form-control p-input" id="femaleexamdate" aria-describedby="emailHelp" >
+                                  <label for="passed_division">Passed Division</label>
+                                  <input type="text" name="passed_division" value="{{ $data['passed_division'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="femaleexamdate">District</label>
-                                  <input type="text" value="" class="form-control p-input" id="femaleexamdate" aria-describedby="emailHelp" >
+                                  <label for="residential_status">Residential Status</label>
+                                  <input type="text" name="residential_status" value="{{ $data['residential_status'] }}" class="form-control p-input" disabled>
                              </div>
-                          <button type="submit" class="btn btn-success">Save</button>
+                             <div class="form-group">
+                                  <label for="payment_type">Payment Type</label>
+                                  <input type="text" name="payment_type" value="{{ $data['payment_type'] }}" class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="sender_no">Sender No</label>
+                                  <input type="text" name="sender_no" value="{{ $data['sender_no'] }}"  class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="sender_no">Registered at</label>
+                                  <input type="text" name="sender_no" value="{{ $data['created_at'] }}"  class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="sender_no">Updated at</label>
+                                  <input type="text" name="sender_no" value="{{ $data['updated_at'] }}"  class="form-control p-input" disabled>
+                             </div>
+
+                            <div style="margin: 10px 0px 10px 0px; float:right;">
+                              <a href="{{route('admin.registered-students')}}" style="text-decoration: none;" type="button" class="btn btn-primary">Back</a>
+                            </div>
                     </form>
                 </div>
               </div>
@@ -219,25 +234,16 @@
 
 
 
-  <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../../node_modules/popper.js/dist/umd/popper.min.js"></script>
-  <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../../node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js"></script>
+  <script src="{{ asset('css/node_modules/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('css/node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
+  <script src="{{ asset('css/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('css/node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
   <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="../../node_modules/datatables.net/js/jquery.dataTables.js"></script>
-  <script src="../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/hoverable-collapse.js"></script>
-  <script src="../../js/misc.js"></script>
-  <script src="../../js/settings.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="../../js/data-table.js"></script>
+  <script src="{{ asset('js/admin/off-canvas.js') }}"></script>
+  <script src="{{ asset('js/admin/misc.js') }}"></script>
   <!-- End custom js for this page-->
 </body>
 

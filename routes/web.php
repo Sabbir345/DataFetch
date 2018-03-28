@@ -28,13 +28,16 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin', 'AdminController@getAdminPanel')->name('admin.dashboard');
     Route::get('/admin/exam-dates', 'AdminController@getExamDatePage')->name('exam-dates');
-    Route::get('/admin/registered-students', 'AdminController@getRegisteredStudentsPage')->name('admin.registered-students');
-    Route::get('/admin/general-students', 'AdminController@getGeneralStudentsPage')->name('admin.general-students');
-    Route::post('/admin/exam-date/save', 'AdminController@saveExamDates')->name('admin.save-exam-dates');
 
+    Route::get('/admin/registered-students', 'AdminController@getRegisteredStudentsPage')->name('admin.registered-students');
+    Route::get('/admin/registered-students/edit/{id}', 'AdminController@getRegisteredStudentEditPage')->name('admin.getRegisteredStudentEditPage');
+    Route::get('/admin/registered-students/view/{id}', 'AdminController@getRegisteredStudentShowPage')->name('admin.getRegisteredStudentShowPage');
+    Route::post('/admin/registered-students/update', 'AdminController@registeredStudentUpdate')->name('admin.registeredStudentUpdate');
+
+    Route::get('/admin/general-students', 'AdminController@getGeneralStudentsPage')->name('admin.general-students');
+    Route::get('/admin/general-students/edit/{id}', 'AdminController@getGeneralStudentEditPage')->name('admin.getGeneralStudentEditPage');
+    Route::post('/admin/general-students/update', 'AdminController@generalStudentUpdate')->name('admin.generalStudentUpdate');
+
+    Route::post('/admin/exam-date/save', 'AdminController@saveExamDates')->name('admin.save-exam-dates');
     Route::post('/upload-csv', 'AdminController@getCSVData')->name('upload-csv');
-    Route::get('/students', 'AdminController@getStudents')->name('get_students');
-    Route::get('/registered/students', 'AdminController@getRegisteredStudents')->name('get_registered_students');
-    Route::get('/students/{roll_number}', 'AdminController@getSingleStudent')->name('get_single_student');
-    Route::get('/registered/students/{id}', 'AdminController@getSingleRegisteredStudents')->name('get_single_registered_students');
 });

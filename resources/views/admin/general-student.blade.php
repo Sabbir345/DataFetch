@@ -181,7 +181,7 @@
                           <td>{{$student->post_office}}</td>
                           <td>{{$student->district}}</td>  
                           <td>
-                            <button type="button" class="btn btn-xs btn-success">Edit</button>
+                            <a href="{{route('admin.getGeneralStudentEditPage', ['id' => $student->id])}}" type="button" class="btn btn-xs btn-success">Edit</a>
                             <!-- <label class="btn btn-primary"><a href="../../pages/tables/edit-data.html">Edit</a></label> -->
                             <button class="btn btn-xs btn-danger">Delete</button>
                           </td>
