@@ -20,7 +20,7 @@ Route::get('/card/{rollNumber}/pdf', 'HomeController@getAdmitCardPdf')->name('ad
 
 Route::get('/login', 'AdminController@showLoginForm')->name('login');
 Route::post('/login', 'AdminController@login')->name('login.post');
-Route::get('/logout', 'AdminController@logout')->name('logout');
+Route::post('/logout', 'AdminController@logout')->name('logout');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -33,10 +33,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/registered-students/edit/{id}', 'AdminController@getRegisteredStudentEditPage')->name('admin.getRegisteredStudentEditPage');
     Route::get('/admin/registered-students/view/{id}', 'AdminController@getRegisteredStudentShowPage')->name('admin.getRegisteredStudentShowPage');
     Route::post('/admin/registered-students/update', 'AdminController@registeredStudentUpdate')->name('admin.registeredStudentUpdate');
+    Route::post('/admin/registered-students/delete', 'AdminController@registeredStudentDelete')->name('admin.registeredStudentDelete');
 
     Route::get('/admin/general-students', 'AdminController@getGeneralStudentsPage')->name('admin.general-students');
+    Route::get('/admin/general-students/create', 'AdminController@getGeneralStudentCreatePage')->name('admin.getGeneralStudentCreatePage');
+    Route::post('/admin/general-students/create', 'AdminController@createGeneralStudent')->name('admin.createGeneralStudent');
+    Route::get('/admin/general-students/view/{id}', 'AdminController@getGeneralStudentShowPage')->name('admin.getGeneralStudentShowPage');    
     Route::get('/admin/general-students/edit/{id}', 'AdminController@getGeneralStudentEditPage')->name('admin.getGeneralStudentEditPage');
     Route::post('/admin/general-students/update', 'AdminController@generalStudentUpdate')->name('admin.generalStudentUpdate');
+    Route::post('/admin/general-students/delete', 'AdminController@generalStudentDelete')->name('admin.generalStudentDelete');
+    
 
     Route::post('/admin/exam-date/save', 'AdminController@saveExamDates')->name('admin.save-exam-dates');
     Route::post('/upload-csv', 'AdminController@getCSVData')->name('upload-csv');

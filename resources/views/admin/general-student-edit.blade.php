@@ -87,8 +87,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a  href="{{route('logout')}}" type="button" class="btn btn-danger" style="margin-left: 85%; text-decoration: none;">Logout</a>
-        
+      <form action="{{route('logout')}}" method="post" style="margin-left: 85%;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <button class="btn btn-danger" >Logout</button>
+      </form>
+
       </div>
     </nav>
     <!-- partial -->
@@ -151,7 +154,7 @@
         </nav>
         <!-- partial -->
         <div class="content-wrapper">
-          <h1 class="page-title">Edit Student Data</h1>
+          <h1 class="page-title">Edit General Student Data</h1>
           <div class="card">
             <div class="card-body">
               <div class="row">
@@ -187,7 +190,11 @@
                                   <label for="district">District</label>
                                   <input type="text" name="district" value="{{ $data['district'] }}"  class="form-control p-input" required>
                              </div>
-                          <button type="submit" class="btn btn-success">Update</button>
+
+                            <div style="float:right;">
+                              <button type="submit" class="btn btn-success">Update</button>
+                              <a href="{{route('admin.general-students')}}" type="button" style="text-decoration: none;" class="btn btn-danger">Cancel</a>
+                            </div>
                     </form>
                 </div>
               </div>

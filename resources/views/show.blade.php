@@ -108,9 +108,6 @@
 
 		<div class="content">
 			<div class="co1">
-				@if(isset($data['hall']) && !empty($data['hall']))
-				<p><b>Farik: {{ $data['hall'] }}</b></p>
-				@endif
 				<p><b>Year:</b> {{ $data['year'] }}</p>
 				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
                 <p><b>Roll Number:</b>{{ $data['admit_card']->roll_number }}</p>
@@ -125,17 +122,19 @@
 				@if(isset($data['exam_date']) && !empty($data['exam_date']))
 					<p><b>Exam Date</b> {{ $data['exam_date'] }}</p>
 				@endif
+				@if(isset($data['hall']) && !empty($data['hall']))
+				<p><b>Farik: {{ $data['hall'] }}</b></p>
+				@endif
 			</div>
 		</div><!-- content -->
 	</div><!-- card -->
 
-<a href="{{ route('home') }}"> 
-<button style="margin-left: 45%; margin-top: 20px;" type="btn btn-primary">Go Back</button>
- </a>
-
-<a href="{{ route('admit-card.download', $data['admit_card']->roll_number) }}">
-	<button style="margin-left: 45%; margin-top: 20px;" type="btn btn-primary">Download PDF</button>
-</a>
+	<div style="margin-top: 20px;">
+		<a href="{{ route('admit-card.download', $data['admit_card']->roll_number) }}" type="button" class="btn btn-success" style="margin-left: 40%; text-decoration: none;">
+		<span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download PDF
+		</a>
+		<a href="{{ route('home') }}" type="button" class="btn btn-danger">Cancel</a> 
+	</div>
 
 @else
 

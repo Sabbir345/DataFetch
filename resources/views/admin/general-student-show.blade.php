@@ -87,11 +87,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <form action="{{route('logout')}}" method="post" style="margin-left: 85%;">
+      <form action="{{route('logout')}}" method="post" style="margin-left: 85%;">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <button class="btn btn-danger" >Logout</button>
-        </form>
-                
+      </form>
+
       </div>
     </nav>
     <!-- partial -->
@@ -154,63 +154,67 @@
         </nav>
         <!-- partial -->
         <div class="content-wrapper">
-          <h1 class="page-title">Registered Student Information</h1>
+          <h1 class="page-title">General Student Information</h1>
           <div class="card">
             <div class="card-body">
               <div class="row">
                 <div class="col-12">
-                  <form class="forms-inline" method="post" action="{{route('admin.registeredStudentUpdate')}}">
+                  <form class="forms-sample" action="#">
                             <div class="form-group">
-                                  <label for="profession">Student Name</label>
-                                  <input type="text" name="profession" value="{{ $data->student->name }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="profession">Roll Number</label>
-                                  <input type="text" name="profession" value="{{ $data->student->roll_number }}" class="form-control p-input" disabled>
+                                  <label for="roll_number">Roll Number</label>
+                                  <input type="text" value="{{ $data['roll_number'] }}" class="form-control p-input" disabled>
                              </div>
                             <div class="form-group">
-                                  <label for="profession">Profession</label>
-                                  <input type="text" name="profession" value="{{ $data['profession'] }}" class="form-control p-input" disabled>
-                             </div>
-                            <div class="form-group">
-                                  <label for="student_type">Student Type</label>
-                                  <input type="text" name="student_type" value="{{ $data['student_type'] }}" class="form-control p-input" disabled>
+                                  <label for="name">Name</label>
+                                  <input type="text" value="{{ $data['name'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="designation">Designation</label>
-                                  <input type="text" name="designation" value="{{ $data['designation'] }}" class="form-control p-input" disabled>
+                                  <label for="name">Email</label>
+                                  <input type="text" value="{{ isset($data['email']) ? $data['email'] : 'Not Found' }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="passed_year">Passed Year</label>
-                                  <input type="text" name="passed_year" value="{{ $data['passed_year'] }}" class="form-control p-input" disabled>
+                                  <label for="name">Date of Birth</label>
+                                  <input type="text" value="{{ isset($data['d_o_b']) ? $data['d_o_b'] : 'Not Found' }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="passed_division">Passed Division</label>
-                                  <input type="text" name="passed_division" value="{{ $data['passed_division'] }}" class="form-control p-input" disabled>
+                                  <label for="father_name">Father Name</label>
+                                  <input type="text" value="{{ $data['father_name'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="residential_status">Residential Status</label>
-                                  <input type="text" name="residential_status" value="{{ $data['residential_status'] }}" class="form-control p-input" disabled>
+                                  <label for="father_name">Home Phone Number</label>
+                                  <input type="text" value="{{ isset($data['phone_home']) ? $data['phone_home'] : 'Not Found' }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="payment_type">Payment Type</label>
-                                  <input type="text" name="payment_type" value="{{ $data['payment_type'] }}" class="form-control p-input" disabled>
+                                  <label for="father_name">Personal Phone Number</label>
+                                  <input type="text" value="{{ isset($data['phone_personal']) ? $data['phone_personal'] : 'Not Found' }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="sender_no">Sender No</label>
-                                  <input type="text" name="sender_no" value="{{ $data['sender_no'] }}"  class="form-control p-input" disabled>
+                                  <label for="village_name">Village</label>
+                                  <input type="text" value="{{ $data['village_name'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="sender_no">Registered at</label>
-                                  <input type="text" name="sender_no" value="{{ $data['created_at'] }}"  class="form-control p-input" disabled>
+                                  <label for="post_office">Post Office</label>
+                                  <input type="text" value="{{ $data['post_office'] }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
-                                  <label for="sender_no">Updated at</label>
-                                  <input type="text" name="sender_no" value="{{ $data['updated_at'] }}"  class="form-control p-input" disabled>
+                                  <label for="upozilla_name">Upozila</label>
+                                  <input type="text" value="{{ $data['upozilla_name'] }}" class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="district">District</label>
+                                  <input type="text" value="{{ $data['district'] }}"  class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="district">Created at</label>
+                                  <input type="text" value="{{ $data['created_at'] }}"  class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="district">Updated at</label>
+                                  <input type="text" value="{{ $data['updated_at'] }}"  class="form-control p-input" disabled>
                              </div>
 
-                            <div style="margin: 10px 0px 10px 0px; float:right;">
-                              <a href="{{route('admin.registered-students')}}" style="text-decoration: none;" type="button" class="btn btn-primary">Back</a>
+                            <div style="float:right;">
+                              <a href="{{route('admin.general-students')}}" type="button" style="text-decoration: none;" class="btn btn-primary">Back</a>
                             </div>
                     </form>
                 </div>
