@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CSVRequest;
 use App\Http\Requests\GeneralStudentEditRequest;
 use App\Http\Requests\RegisteredStudentEditRequest;
+use App\Http\Requests\CreateStudentRequest;
 
 class AdminController extends Controller
 {
@@ -74,7 +75,7 @@ class AdminController extends Controller
 
     public function getRegisteredStudentsPage()
     {
-        $registeredStudents = RegistrationDetail::with('student')->paginate(50);
+        $registeredStudents = RegistrationDetail::with('student')->orderBy('id', 'DESC')->paginate(50);
         return view('admin.registered-student', array('registeredStudents' => $registeredStudents));
     }
 
@@ -101,10 +102,51 @@ class AdminController extends Controller
         return redirect()->route('admin.registered-students');
     }
 
+    public function registeredStudentDelete(Request $request)
+    {
+        $generalStudent = Student::find($request->student_id);
+
+        if ($generalStudent) {
+            $generalStudent->email = null;
+            $generalStudent->d_o_b = null;
+            $generalStudent->phone_personal = null;
+            $generalStudent->phone_home = null;
+            $generalStudent->avatar = null;
+            $generalStudent->save();
+        }
+        
+        $student = RegistrationDetail::where('student_id', $request->student_id)->first();
+        $student->delete();
+
+        return redirect()->route('admin.registered-students');
+    }
+
+    
     public function getGeneralStudentsPage()
     {
-        $generalStudents = Student::paginate(50);
+        $generalStudents = Student::orderBy('id', 'DESC')->paginate(50);
         return view('admin.general-student', array('generalStudents' => $generalStudents));
+    }
+
+    public function getGeneralStudentShowPage($id)
+    {
+        $student = Student::find($id);
+        return view('admin.general-student-show', array('data' => $student));
+    }
+
+    public function getGeneralStudentCreatePage()
+    {
+        return view('admin.general-student-create');
+    }
+
+    public function createGeneralStudent(CreateStudentRequest $request)
+    {
+        $student = new Student();
+        $student->fill($request->except('_token'));
+        $student->save();
+
+        return redirect()->route('admin.general-students');
+
     }
 
     public function getGeneralStudentEditPage($studentId)
@@ -125,6 +167,19 @@ class AdminController extends Controller
         $student->upozilla_name = $request->upozilla_name;
 
         $student->save();
+
+        return redirect()->route('admin.general-students');
+    }
+
+    public function generalStudentDelete(Request $request)
+    {
+        $registration = RegistrationDetail::where('student_id', $request->id)->first();
+        if ($registration) {
+            $registration->delete();
+        }
+
+        $student = Student::find($request->id);
+        $student->delete();
 
         return redirect()->route('admin.general-students');
     }

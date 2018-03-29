@@ -87,8 +87,12 @@
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
+      
+      <form action="{{route('logout')}}" method="post" style="margin-left: 85%;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <button class="btn btn-danger" >Logout</button>
+      </form>
 
-        <a  href="{{route('logout')}}" type="button" class="btn btn-danger" style="margin-left: 85%; text-decoration: none;">Logout</a>
       </div>
     </nav>
     <!-- partial -->
@@ -107,7 +111,7 @@
              <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
                 <i class="mdi mdi-flag-outline menu-icon"></i>
-                <span class="menu-title">All Student</span>
+                <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
               <div class="collapse" id="validationSubmenu">
@@ -179,8 +183,6 @@
                           <th>Profession</th>
                           <th>Student Type</th>
                           <th>Designation</th>
-                          <th>Passed Year</th>
-                          <th>Passed Division</th>
                           <th>Actions</th>
                       </tr>
                     </thead>
@@ -192,15 +194,42 @@
                           <td>{{$student->student->roll_number}}</td>
                           <td>{{$student->profession}}</td>
                           <td>{{$student->student_type}}</td>
-                          <td>{{$student->designation}}</td>
-                          <td>{{$student->passed_year}}</td>
-                          <td>{{$student->passed_division}}</td>  
+                          <td>{{$student->designation}}</td> 
                           <td>
-                            <a href="{{route('admin.getRegisteredStudentShowPage', ['id' => $student->student_id])}}" type="button" class="btn btn-xs btn-primary">View</a>
-                            <a href="{{route('admin.getRegisteredStudentEditPage', ['id' => $student->student_id])}}" type="button" class="btn btn-xs btn-success">Edit</a>
-                            <button class="btn btn-xs btn-danger">Delete</button>
+                            <a href="{{route('admin.getRegisteredStudentShowPage', ['id' => $student->student_id])}}" type="button" style="text-decoration:none;" class="btn btn-xs btn-primary">View</a>
+                            <a href="{{route('admin.getRegisteredStudentEditPage', ['id' => $student->student_id])}}" type="button" style="text-decoration:none;" class="btn btn-xs btn-success">Edit</a>
+                            <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteDialog">Delete</button>
                           </td>
                       </tr>
+
+
+                        <!-- Delete Confirmation Dialog Start -->
+
+                      <div id="show_user_info">
+                          <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="deleteDialogTitle" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h4 class="modal-title" id="deleteDialog">Warning!</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                          <h4>Are you sure, want to delete this student? </h4>
+                                          <div class="modal-footer-extended">
+                                            <form action="{{route('admin.registeredStudentDelete')}}" method="post">
+                                                <input type="hidden" name="student_id" value="{{$student->student_id}}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button style="margin: 20px 0 20px 0" class="btn btn-danger" type="submit" >Delete</button>
+                                            </form>
+                                            
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- Delete Confirmation Dialog End -->
                       @endforeach
                     </tbody>
                   </table>

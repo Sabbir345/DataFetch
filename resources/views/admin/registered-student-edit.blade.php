@@ -87,8 +87,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a  href="{{route('logout')}}" type="button" class="btn btn-danger" style="margin-left: 85%; text-decoration: none;">Logout</a>
-        
+        <form action="{{route('logout')}}" method="post" style="margin-left: 85%;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <button class="btn btn-danger" >Logout</button>
+        </form>
+
       </div>
     </nav>
     <!-- partial -->

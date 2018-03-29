@@ -107,7 +107,7 @@
              <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
                 <i class="mdi mdi-flag-outline menu-icon"></i>
-                <span class="menu-title">All Student</span>
+                <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
               <div class="collapse" id="validationSubmenu">
@@ -153,7 +153,8 @@
         </nav>
         <!-- partial -->
         <div class="content-wrapper">
-          <h1 class="page-title">All Student Data</h1>
+        <a href="{{route('admin.getGeneralStudentCreatePage')}}" style="float:right; margin-top: 10px; text-decoration: none;" type="button" class="btn btn-sm btn-primary">Create New</a>
+          <h1 class="page-title">All General Student Data</h1>
           <div class="card">
             <div class="card-body">
              
@@ -162,30 +163,60 @@
                   <table   class="table table-bordered" style="width:100%;">
                     <thead>
                       <tr>
+                          <th>#</th>
                           <th>Roll Number</th>
                           <th>Name</th>
                           <th>Father Name</th>
                           <th>Village</th>
                           <th>Post Office</th>
-                          <th>District</th>
                           <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($generalStudents as $student)
+                      @foreach($generalStudents as $index => $student)
                       <tr>
+                          <td>{{$index+1}}</td>
                           <td>{{$student->roll_number}}</td>
                           <td>{{$student->name}}</td>
                           <td>{{$student->father_name}}</td>
                           <td>{{$student->village_name}}</td>
                           <td>{{$student->post_office}}</td>
-                          <td>{{$student->district}}</td>  
                           <td>
+                            <a href="{{route('admin.getGeneralStudentShowPage', ['id' => $student->id])}}" type="button" class="btn btn-xs btn-primary">View</a>
                             <a href="{{route('admin.getGeneralStudentEditPage', ['id' => $student->id])}}" type="button" class="btn btn-xs btn-success">Edit</a>
                             <!-- <label class="btn btn-primary"><a href="../../pages/tables/edit-data.html">Edit</a></label> -->
-                            <button class="btn btn-xs btn-danger">Delete</button>
+                            <button class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#deleteDialog">Delete</button>
                           </td>
                       </tr>
+
+                      <!-- Delete Confirmation Dialog Start -->
+
+                      <div id="show_user_info">
+                          <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="deleteDialogTitle" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h4 class="modal-title" id="deleteDialog">Warning!</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                          <h4>Are you sure, want to delete this student? </h4>
+                                          <div class="modal-footer-extended">
+                                            <form action="{{route('admin.generalStudentDelete')}}" method="post">
+                                                <input type="hidden" name="id" value="{{$student->id}}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button style="margin: 20px 0 20px 0" class="btn btn-danger" type="submit" >Delete</button>
+                                            </form>
+                                            
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- Delete Confirmation Dialog End -->
+
                       @endforeach
                     </tbody>
                   </table>

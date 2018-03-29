@@ -106,9 +106,6 @@
     
     <div class="content">
         <div class="co1">
-            @if(isset($data['hall']) && !empty($data['hall']))
-                <p><b>Farik: {{ $data['hall'] }}</b></p>
-            @endif
             <p><b>Year:</b> {{ $data['year'] }}</p>
             <p><b>Name:</b> {{ $data['admit_card']->name }}</p>
             <p><b>Roll Number:</b>{{ $data['admit_card']->roll_number }}</p>
@@ -122,6 +119,9 @@
             <p><b>Student Type:</b> {{ $data['student_type'] }}</p>
             @if(isset($data['exam_date']) && !empty($data['exam_date']))
                 <p><b>Exam Date</b> {{ $data['exam_date'] }}</p>
+            @endif
+            @if(isset($data['hall']) && !empty($data['hall']))
+                <p><b>Farik: {{ $data['hall'] }}</b></p>
             @endif
         </div>
     </div><!-- content -->
