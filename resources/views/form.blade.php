@@ -131,7 +131,7 @@
             </div>
             <div class="row">
                 <div class="col-half">
-                    <h4>Khamis Devision </h4>
+                    <h4>Khamis Division </h4>
                     <div class="input-group">
                         <select name="passed_division">
                             <option value="First" selected>First</option>
