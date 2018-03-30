@@ -210,6 +210,7 @@ class AdminController extends Controller
      */
     public function getCSVData(CSVRequest $request)
     {
+        set_time_limit(0);
         $uploadedCsv = $request->file('student_csv');
         $fileExtension = $uploadedCsv->getClientOriginalExtension();
 
