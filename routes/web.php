@@ -11,22 +11,26 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/student/info/{rollNumber}', 'HomeController@getStudentInfo')->name('get-student-info');
-Route::post('/student/info/store', 'HomeController@storeStudentInfo')->name('info.store');
-Route::post('/admit-card' , 'HomeController@getAdmitCard')->name('admit-card');
-Route::get('/card/{rollNumber}/pdf', 'HomeController@getAdmitCardPdf')->name('admit-card.download');
+// Route::group(['middleware' => ['guest']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/student/info/{rollNumber}', 'HomeController@getStudentInfo')->name('get-student-info');
+    Route::post('/student/info/store', 'HomeController@storeStudentInfo')->name('info.store');
+    Route::post('/admit-card' , 'HomeController@getAdmitCard')->name('admit-card');
+    Route::get('/card/{rollNumber}/pdf', 'HomeController@getAdmitCardPdf')->name('admit-card.download');
 
 
-Route::get('/login', 'AdminController@showLoginForm')->name('login');
-Route::post('/login', 'AdminController@login')->name('login.post');
-Route::post('/logout', 'AdminController@logout')->name('logout');
+    Route::get('/login', 'AdminController@showLoginForm')->name('login');
+    Route::post('/login', 'AdminController@login')->name('login.post');
+    Route::post('/logout', 'AdminController@logout')->name('logout');
+// });
 
 
 Route::group(['middleware' => ['auth']], function () {
     // Specified Admin Routes
 
     Route::get('/admin', 'AdminController@getAdminPanel')->name('admin.dashboard');
+    Route::get('/admin/password-change', 'AdminController@showPasswordChangeMenu')->name('admin.showPasswordChangeMenu');
+    Route::post('/admin/password-change', 'AdminController@changeAdminPassword')->name('admin.changeAdminPassword');
     Route::get('/admin/exam-dates', 'AdminController@getExamDatePage')->name('exam-dates');
 
     Route::get('/admin/registered-students', 'AdminController@getRegisteredStudentsPage')->name('admin.registered-students');

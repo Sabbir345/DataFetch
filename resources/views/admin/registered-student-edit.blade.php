@@ -67,7 +67,7 @@
         </div>
       </div>
       <!-- layout section tabends -->
-    
+
       <!-- chat section tabends -->
     </div>
   </div>
@@ -82,7 +82,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
           <span class="navbar-toggler-icon"></span>
         </button>
-       
+
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -109,7 +109,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -123,7 +123,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tablesSubmenu" aria-expanded="false" aria-controls="tablesSubmenu">
-                <i class="mdi mdi-table-large menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All Registered Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -137,7 +137,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#examdate" aria-expanded="false" aria-controls="examdate">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-calendar-multiple menu-icon"></i>
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -148,6 +148,12 @@
                   </li>
                 </ul>
               </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.showPasswordChangeMenu')}}">
+                <i class="mdi mdi-security menu-icon"></i>
+                <span class="menu-title">Change Password</span>
+              </a>
             </li>
             <!--forms end-->
           </ul>

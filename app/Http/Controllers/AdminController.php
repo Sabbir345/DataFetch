@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\ExamDate;
-use App\RegistrationDetail;
-use App\Student;
-use App\User;
-use Auth;
-use Illuminate\Http\Request;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\CSVRequest;
 use App\Http\Requests\GeneralStudentEditRequest;
 use App\Http\Requests\RegisteredStudentEditRequest;
-use App\Http\Requests\CreateStudentRequest;
+use App\RegistrationDetail;
+use App\Student;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -20,7 +23,7 @@ class AdminController extends Controller
         if (!Auth::check()) {
             return view('login');
         }
-        return redirect()->route('get_students');
+        return redirect()->route('admin.dashboard');
     }
 
     public function login(Request $request)
@@ -37,9 +40,12 @@ class AdminController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+
         return redirect()->route('login');
     }
 
@@ -56,6 +62,22 @@ class AdminController extends Controller
         return view('admin.admin', array('data' => $data));
     }
 
+    public function showPasswordChangeMenu()
+    {
+        return view('admin.change-password');
+    }
+
+    public function changeAdminPassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect()->route('admin.showPasswordChangeMenu')->with('success', 'Your Password Changed Successfully!');
+        }
+        return redirect()->route('admin.showPasswordChangeMenu')->with('error', 'Your Old Password is Wrong!');
+    }
+
     public function getExamDatePage()
     {
         $examDates = ExamDate::select('name', 'date')->get();
@@ -70,7 +92,7 @@ class AdminController extends Controller
             $date->save();
         }
 
-        return redirect()->route('exam-dates');
+        return redirect()->route('exam-dates')->with('success', 'Exam Dates Updated Successfully!');
     }
 
     public function getRegisteredStudentsPage()
@@ -99,7 +121,7 @@ class AdminController extends Controller
             $registeredStudent->{$key} = $value;
         }
         $registeredStudent->save();
-        return redirect()->route('admin.registered-students');
+        return redirect()->route('admin.registered-students')->with('success', 'Register Student Updated Successfully!');
     }
 
     public function registeredStudentDelete(Request $request)
@@ -114,14 +136,13 @@ class AdminController extends Controller
             $generalStudent->avatar = null;
             $generalStudent->save();
         }
-        
+
         $student = RegistrationDetail::where('student_id', $request->student_id)->first();
         $student->delete();
 
-        return redirect()->route('admin.registered-students');
+        return redirect()->route('admin.registered-students')->with('success', 'Registered Student Deleted Successfully!');
     }
 
-    
     public function getGeneralStudentsPage()
     {
         $generalStudents = Student::orderBy('id', 'DESC')->paginate(50);
@@ -145,7 +166,7 @@ class AdminController extends Controller
         $student->fill($request->except('_token'));
         $student->save();
 
-        return redirect()->route('admin.general-students');
+        return redirect()->route('admin.general-students')->with('success', 'New Student Created Successfully!');
 
     }
 
@@ -168,7 +189,7 @@ class AdminController extends Controller
 
         $student->save();
 
-        return redirect()->route('admin.general-students');
+        return redirect()->route('admin.general-students')->with('success', 'Student Updated Successfully!');
     }
 
     public function generalStudentDelete(Request $request)
@@ -181,56 +202,58 @@ class AdminController extends Controller
         $student = Student::find($request->id);
         $student->delete();
 
-        return redirect()->route('admin.general-students');
+        return redirect()->route('admin.general-students')->with('success', 'Student Deleted Successfully!');
     }
 
     /**
-	 * Getting Uploaded CSV data
-	 */
-	public function getCSVData(CSVRequest $request)
-	{
-		$uploadedCsv = $request->file('student_csv');
-		$fileExtension= $uploadedCsv->getClientOriginalExtension();
+     * Getting Uploaded CSV data
+     */
+    public function getCSVData(CSVRequest $request)
+    {
+        $uploadedCsv = $request->file('student_csv');
+        $fileExtension = $uploadedCsv->getClientOriginalExtension();
 
-		if($fileExtension != "csv") {
-			return ["The File Type Must be in csv"];
-		}
-
-		$csvAsArray = array_map('str_getcsv', file($uploadedCsv));
-
-		foreach($csvAsArray as $index => $value) {
-			if($index == 0) continue;
-
-			$data = array(
-				'roll_number' => $value[0],
-				'name' => $value[1],
-				'father_name' => $value[2],
-				'village_name' => $value[3],
-				'district' => $value[4],
-				'upozilla_name' => $value[5],
-				'post_office' => $value[6]
-			);
-
-			$alreadyExistsStudent = Student::where('roll_number', $data['roll_number'])->first();
-			if(empty($alreadyExistsStudent)) {
-				$this->storeStudent($data);
-			}
+        if ($fileExtension != "csv") {
+            return ["The File Type Must be in csv"];
         }
-        
+
+        $csvAsArray = array_map('str_getcsv', file($uploadedCsv));
+
+        foreach ($csvAsArray as $index => $value) {
+            if ($index == 0) {
+                continue;
+            }
+
+            $data = array(
+                'roll_number' => $value[0],
+                'name' => $value[1],
+                'father_name' => $value[2],
+                'village_name' => $value[3],
+                'district' => $value[4],
+                'upozilla_name' => $value[5],
+                'post_office' => $value[6],
+            );
+
+            $alreadyExistsStudent = Student::where('roll_number', $data['roll_number'])->first();
+            if (empty($alreadyExistsStudent)) {
+                $this->storeStudent($data);
+            }
+        }
+
         return redirect()->route('admin.dashboard');
-	}
+    }
 
+    public function storeStudent($data)
+    {
+        $student = new Student;
+        $student->roll_number = $data['roll_number'];
+        $student->name = $data['name'];
+        $student->father_name = $data['father_name'];
+        $student->village_name = $data['village_name'];
+        $student->district = $data['district'];
+        $student->upozilla_name = $data['upozilla_name'];
+        $student->post_office = $data['post_office'];
 
-	public function storeStudent($data) {
-		$student = new Student;
-		$student->roll_number = $data['roll_number'];
-		$student->name = $data['name'];
-		$student->father_name = $data['father_name'];
-		$student->village_name = $data['village_name'];
-		$student->district = $data['district'];
-		$student->upozilla_name = $data['upozilla_name'];
-		$student->post_office = $data['post_office'];
-
-		$student->save();
-	}
+        $student->save();
+    }
 }

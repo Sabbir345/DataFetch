@@ -2,20 +2,20 @@
 <html lang="en">
 
 
-<!-- Mirrored from www.urbanui.com/salt/jquery/pages/tables/data-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:34:39 GMT -->
+<!-- Mirrored from www.urbanui.com/salt/jquery/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:31:57 GMT -->
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Fultali</title>
   <!-- plugins:css -->
+  <!-- {{ asset('css/css1/bootstrap.css') }} -->
   <link rel="stylesheet" href="{{ asset('css/node_modules/mdi/css/materialdesignicons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css') }}">
   <!-- endinject -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
-  <!-- endinject -->
 </head>
 <body class="sidebar-dark">
   <!-- partial:partials/_settings-panel.html -->
@@ -67,7 +67,7 @@
         </div>
       </div>
       <!-- layout section tabends -->
-    
+
       <!-- chat section tabends -->
     </div>
   </div>
@@ -76,19 +76,22 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar navbar-light col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="{{route('admin.dashboard')}}"><img src="{{asset('img/admin/logo.jpg')}}" style="height:50px ;width:50px ;" alt="Logo"></a>
+        <a class="navbar-brand brand-logo" href="{{ route('admin.dashboard') }}"><img src="{{asset('img/admin/logo.jpg')}}" style="height:50px ;width:50px ;" alt="Logo"></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
 
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a  href="{{route('logout')}}" type="button" class="btn btn-danger" style="margin-left: 85%; text-decoration: none;">Logout</a>
+        <form action="{{route('logout')}}" method="post" style="margin-left: 85%;">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <button class="btn btn-danger" >Logout</button>
+        </form>
+
       </div>
     </nav>
     <!-- partial -->
@@ -104,9 +107,9 @@
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -120,7 +123,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tablesSubmenu" aria-expanded="false" aria-controls="tablesSubmenu">
-                <i class="mdi mdi-table-large menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All Registered Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -134,11 +137,10 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#examdate" aria-expanded="false" aria-controls="examdate">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-calendar-multiple menu-icon"></i>
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
-
               <div class="collapse" id="examdate">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
@@ -147,7 +149,12 @@
                 </ul>
               </div>
             </li>
-            <!--forms end-->
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.showPasswordChangeMenu')}}">
+                <i class="mdi mdi-security menu-icon"></i>
+                <span class="menu-title">Change Password</span>
+              </a>
+            </li>
             <!--forms end-->
           </ul>
         </nav>
@@ -157,7 +164,16 @@
           <h1 class="page-title">All General Student Data</h1>
           <div class="card">
             <div class="card-body">
-             
+           @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+             @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
               <div class="row">
                 <div class="col-12">
                   <table   class="table table-bordered" style="width:100%;">
@@ -184,8 +200,7 @@
                           <td>
                             <a href="{{route('admin.getGeneralStudentShowPage', ['id' => $student->id])}}" type="button" class="btn btn-xs btn-primary">View</a>
                             <a href="{{route('admin.getGeneralStudentEditPage', ['id' => $student->id])}}" type="button" class="btn btn-xs btn-success">Edit</a>
-                            <!-- <label class="btn btn-primary"><a href="../../pages/tables/edit-data.html">Edit</a></label> -->
-                            <button class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                            <button class="btn btn-xs btn-danger"  data-toggle="modal" data-target="#deleteDialog" onclick="deleteStudent({{$student->id}})">Delete</button>
                           </td>
                       </tr>
 
@@ -202,7 +217,7 @@
                                           <h4>Are you sure, want to delete this student? </h4>
                                           <div class="modal-footer-extended">
                                             <form action="{{route('admin.generalStudentDelete')}}" method="post">
-                                                <input type="hidden" name="id" value="{{$student->id}}">
+                                                <input type="hidden" name="id" id="id" value="">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <button style="margin: 20px 0 20px 0" class="btn btn-danger" type="submit" >Delete</button>
                                             </form>
@@ -246,6 +261,12 @@
   </div>
   <!-- container-scroller -->
 
+  <script>
+      var deleteStudent = function(id) {
+        $('.modal-body #id').val(id);
+        console.log('clicked');
+      }
+  </script>
 
 
   <!-- container-scroller -->

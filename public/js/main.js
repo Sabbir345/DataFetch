@@ -1,11 +1,11 @@
 new Vue({
 
-    el : '#app',
+    el: '#app',
     delimiters: ['${', '}'],
 
-    data : {
+    data: {
         rollNumber: '',
-        studentInfo : {},
+        studentInfo: {},
         studentAddress: {},
         errorMessage: {},
     },
@@ -19,12 +19,12 @@ new Vue({
             }
 
             var that = this;
-            axios.get('student/info/'+that.rollNumber)
-                .then(function (response) {
+            axios.get('student/info/' + that.rollNumber)
+                .then(function(response) {
                     that.studentInfo = response.data[0];
                     that.studentAddress = response.data[0].address;
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     alert('Wrong Student ID or Student Not Found!');
                 });
 

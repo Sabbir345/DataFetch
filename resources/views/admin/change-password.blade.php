@@ -67,7 +67,7 @@
         </div>
       </div>
       <!-- layout section tabends -->
-    
+
       <!-- chat section tabends -->
     </div>
   </div>
@@ -82,7 +82,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
           <span class="navbar-toggler-icon"></span>
         </button>
-       
+
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -91,7 +91,7 @@
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <button class="btn btn-danger" >Logout</button>
         </form>
-                
+
       </div>
     </nav>
     <!-- partial -->
@@ -109,7 +109,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -123,7 +123,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tablesSubmenu" aria-expanded="false" aria-controls="tablesSubmenu">
-                <i class="mdi mdi-table-large menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All Registered Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -137,7 +137,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#examdate" aria-expanded="false" aria-controls="examdate">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-calendar-multiple menu-icon"></i>
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -160,68 +160,49 @@
         </nav>
         <!-- partial -->
         <div class="content-wrapper">
-          <h1 class="page-title">Registered Student Information</h1>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12">
-                  <form class="forms-inline" method="post" action="{{route('admin.registeredStudentUpdate')}}">
+          <div class="row">
+            <div class="col-md-8">
+            @if (count($errors) > 0)
+            <div>
+                <h2>Please Enter these required field(s)</h2>
+                <ol>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: red;">{{ $error }}</li>
+                    @endforeach
+                </ol>
+            </div>
+            @endif
+
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+             @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+                  <form class="forms-sample" method="post" action="{{route('admin.changeAdminPassword')}}">
                             <div class="form-group">
-                                  <label for="profession">Student Name</label>
-                                  <input type="text" name="profession" value="{{ $data->student->name }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="profession">Roll Number</label>
-                                  <input type="text" name="profession" value="{{ $data->student->roll_number }}" class="form-control p-input" disabled>
+                                  <label for="old_password">Old Password*</label>
+                                  <input type="password" name="old_password" class="form-control p-input" required>
                              </div>
                             <div class="form-group">
-                                  <label for="profession">Profession</label>
-                                  <input type="text" name="profession" value="{{ $data['profession'] }}" class="form-control p-input" disabled>
-                             </div>
-                            <div class="form-group">
-                                  <label for="student_type">Student Type</label>
-                                  <input type="text" name="student_type" value="{{ $data['student_type'] }}" class="form-control p-input" disabled>
+                                  <label for="password">New Password* (minimum 8 characters)</label>
+                                  <input type="password" name="password" class="form-control p-input" required>
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                              </div>
                              <div class="form-group">
-                                  <label for="designation">Designation</label>
-                                  <input type="text" name="designation" value="{{ $data['designation'] }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="passed_year">Passed Year</label>
-                                  <input type="text" name="passed_year" value="{{ $data['passed_year'] }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="passed_division">Passed Division</label>
-                                  <input type="text" name="passed_division" value="{{ $data['passed_division'] }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="residential_status">Residential Status</label>
-                                  <input type="text" name="residential_status" value="{{ $data['residential_status'] }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="payment_type">Payment Type</label>
-                                  <input type="text" name="payment_type" value="{{ $data['payment_type'] }}" class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="sender_no">Sender No</label>
-                                  <input type="text" name="sender_no" value="{{ $data['sender_no'] }}"  class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="sender_no">Registered at</label>
-                                  <input type="text" name="sender_no" value="{{ $data['created_at'] }}"  class="form-control p-input" disabled>
-                             </div>
-                             <div class="form-group">
-                                  <label for="sender_no">Updated at</label>
-                                  <input type="text" name="sender_no" value="{{ $data['updated_at'] }}"  class="form-control p-input" disabled>
+                                  <label for="password_confirmation">Confirm New Password* (minimum 8 characters)</label>
+                                  <input type="password" name="password_confirmation" class="form-control p-input" required>
                              </div>
 
-                            <div style="margin: 10px 0px 10px 0px; float:right;">
-                              <a href="{{route('admin.registered-students')}}" style="text-decoration: none;" type="button" class="btn btn-primary">Back</a>
+                            <div style="float:right;">
+                              <button type="submit" class="btn btn-success">Change</button>
                             </div>
                     </form>
                 </div>
-              </div>
-            </div>
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -229,7 +210,7 @@
         <footer class="footer">
           <div class="container-fluid clearfix">
             <span class="float-right">
-                <a href="#">Fultali Admin</a> &copy; 2018
+                <a href="#">Fultali Admin</a> &copy; 2017
             </span>
           </div>
         </footer>
@@ -240,8 +221,6 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-
-
 
   <!-- plugins:js -->
   <script src="{{ asset('css/node_modules/jquery/dist/jquery.min.js') }}"></script>
@@ -257,5 +236,5 @@
 </body>
 
 
-<!-- Mirrored from www.urbanui.com/salt/jquery/pages/tables/data-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:34:39 GMT -->
+<!-- Mirrored from www.urbanui.com/salt/jquery/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Dec 2017 12:32:50 GMT -->
 </html>
