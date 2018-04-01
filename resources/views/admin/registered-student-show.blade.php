@@ -94,7 +94,7 @@
                 
       </div>
     </nav>
-    <!-- partial -->
+   <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <div class="row row-offcanvas row-offcanvas-right">
         <!-- partial:partials/_sidebar.html -->
@@ -109,7 +109,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -123,7 +123,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tablesSubmenu" aria-expanded="false" aria-controls="tablesSubmenu">
-                <i class="mdi mdi-table-large menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All Registered Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -137,7 +137,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#examdate" aria-expanded="false" aria-controls="examdate">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+                <i class="mdi mdi-calendar-multiple menu-icon"></i>
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -163,6 +163,11 @@
           <h1 class="page-title">Registered Student Information</h1>
           <div class="card">
             <div class="card-body">
+              @if(isset($data->student->avatar) && !empty($data->student->avatar))
+              <div class="img" style="float:right">
+                  <img src="{{$data->student->avatar}}" alt="student picture" height="200" width="200"><br>
+              </div>
+              @endif
               <div class="row">
                 <div class="col-12">
                   <form class="forms-inline" method="post" action="{{route('admin.registeredStudentUpdate')}}">
@@ -171,8 +176,12 @@
                                   <input type="text" name="profession" value="{{ $data->student->name }}" class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
+                                  <label for="profession">Registration Number</label>
+                                  <input type="text" name="registration_id" value="{{ $data->student->roll_number }}" class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
                                   <label for="profession">Roll Number</label>
-                                  <input type="text" name="profession" value="{{ $data->student->roll_number }}" class="form-control p-input" disabled>
+                                  <input type="text" name="profession" value="{{ $data->registration_id }}" class="form-control p-input" disabled>
                              </div>
                             <div class="form-group">
                                   <label for="profession">Profession</label>
@@ -204,7 +213,7 @@
                              </div>
                              <div class="form-group">
                                   <label for="sender_no">Sender No</label>
-                                  <input type="text" name="sender_no" value="{{ $data['sender_no'] }}"  class="form-control p-input" disabled>
+                                  <input type="text" name="sender_no" value="{{ isset($data['sender_no']) ? $data['sender_no'] : 'Not Found' }}"  class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
                                   <label for="sender_no">Registered at</label>

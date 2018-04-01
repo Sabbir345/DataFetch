@@ -167,7 +167,7 @@
                 <div class="col-12">
                   <form class="forms-sample" action="#">
                             <div class="form-group">
-                                  <label for="roll_number">Roll Number</label>
+                                  <label for="roll_number">Registration Number</label>
                                   <input type="text" value="{{ $data['roll_number'] }}" class="form-control p-input" disabled>
                              </div>
                             <div class="form-group">
@@ -212,11 +212,11 @@
                              </div>
                              <div class="form-group">
                                   <label for="district">Created at</label>
-                                  <input type="text" value="{{ $data['created_at'] }}"  class="form-control p-input" disabled>
+                                  <input type="text" value="{{ isset($data['created_at']) ? $data['created_at'] : 'Not Found' }}"  class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
                                   <label for="district">Updated at</label>
-                                  <input type="text" value="{{ $data['updated_at'] }}"  class="form-control p-input" disabled>
+                                  <input type="text" value="{{ isset($data['updated_at']) ? $data['created_at'] : 'Not Found' }}"  class="form-control p-input" disabled>
                              </div>
 
                             <div style="float:right;">

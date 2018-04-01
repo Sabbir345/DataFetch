@@ -176,11 +176,11 @@
             @endif
               <div class="row">
                 <div class="col-12">
-                  <table   class="table table-bordered" style="width:100%;">
+                  <table   class="table table-bordered" style="width:100%; text-align:center;">
                     <thead>
                       <tr>
                           <th>#</th>
-                          <th>Roll Number</th>
+                          <th>Registration Number</th>
                           <th>Name</th>
                           <th>Father Name</th>
                           <th>Village</th>

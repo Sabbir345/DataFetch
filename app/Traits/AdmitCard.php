@@ -10,13 +10,14 @@ trait AdmitCard {
 	public function getAdmitCardData($student_id)
 	{
 		$admitCard = Student::select(['id', 'name', 'father_name', 'avatar', 'roll_number'])
-                            ->find($student_id);
+							->with('registrationDetail')->find($student_id);
 
 		$data = [
 			'admit_card' => $admitCard,
 			'year' => date('Y'),
 			'hall' => $this->getHallNumber($admitCard->id),
-            'student_id' => $admitCard->id
+			'student_id' => $admitCard->id,
+			'registration_id' => $admitCard->registrationDetail->registration_id
 		];
 
 		if ($admitCard) {
