@@ -193,7 +193,6 @@ footer a, footer a:link {
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="password" name = "password" placeholder="Password" />
     <i class="fa fa-key"></i>
-    <a href="#">Forgot your password?</a>
     <button >
       <i class="spinner"></i>
       <span class="state">Log in</span>
