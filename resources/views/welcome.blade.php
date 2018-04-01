@@ -94,8 +94,7 @@
               </div>
               <div class="top-nav">
                 <h1>দারুল কিরাত মজিদিয়া ফুলতলী ট্রাস্ট</h1>
-                <a href="apply.html" class="forms-and-downloads-a">Online Admision</a>
-                
+                <a href="{{route('home')}}" class="forms-and-downloads-a">Online Admision</a>
               </div>
             </div><!-- End .col -->
           </div><!-- End .row -->

@@ -32,11 +32,11 @@ class InfoStoreRequest extends FormRequest
             'upozilla_name' => 'required',
             'district' => 'required',
             
-            'email' => 'required|email|unique:students,email',
+            
             'image' => 'required|mimes:jpeg,bmp,png,jpg|image',
             'phone_personal' => 'required',
             'phone_home' => 'required',
-            'd_o_b' => 'required',
+            'd_o_b' => 'required|before:-13 years',
 
             'profession' => 'required',
             'student_type' => 'required',
@@ -57,7 +57,8 @@ class InfoStoreRequest extends FormRequest
 		return [
 			'image.required' => 'The image is required',
             'image.image'    => 'Image format is not supported',
-            'd_o_b.required'    => 'Date of Birth is required',
+            'd_o_b.required' => 'Date of Birth is required',
+            'd_o_b.before'   => 'Year in date of birth should be under 2005'
 		];
 	}
 }
