@@ -175,12 +175,12 @@
             @endif
               <div class="row">
                 <div class="col-12">
-                  <table   class="table table-bordered" style="width:100%;">
+                  <table class="table table-bordered" style="width:100%; text-align:center;">
                     <thead>
                       <tr>
                           <th>#</th>
                           <th>Name</th>
-                          <th>Roll Number</th>
+                          <th>Registration Number</th>
                           <th>Profession</th>
                           <th>Student Type</th>
                           <th>Designation</th>

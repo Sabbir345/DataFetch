@@ -82,14 +82,14 @@
 				margin-top: -35px;
 				margin-left: 193px;
 			}
-
+	
 	</style>
 
 	<title>Fultali</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-
+		
 @if(isset($data['admit_card']) && $data['student_type'] != '')
 
 <div class="card">
@@ -119,7 +119,7 @@
 		<div class="content">
 			<div class="co1">
 
-				<p><b>Reg No:</b>{{ $data['registration_id'] }}</p>
+				<p><b>Reg No:</b>{{ $data['admit_card']->roll_number }}</p>
 				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
 				@if(isset($data['residential_status']) && !empty($data['residential_status']))
             	<p><b>Residential Status:</b> {{ $data['residential_status'] }}</p>
@@ -129,21 +129,24 @@
 				@endif
 			</div>
 			<div class="co2">
-				<p><b>Roll No:</b> {{ $data['registration_id'] }}</p>
+				<p><b>Roll No:</b></p>
 				<p><b>Father Name:</b> {{ $data['admit_card']->father_name}} </p>
 				<p><b>Student Type:</b> {{ $data['student_type'] }}</p>
+				<p><b>Exam Date:</b></p>
 				@if(isset($data['exam_date']) && !empty($data['exam_date']))
-					<p><b>Exam Date:</b> {{ $data['exam_date'] }}</p>
+					<p><b>Exam Date</b> {{ $data['exam_date'] }}</p>
 				@endif
-
+				
 			</div>
 		</div><!-- content -->
 		<div class="signature">
-			<span ><b>Student Signature</b></span>
-			<span class="signa">
-				<img src={{ asset('img/sign.jpg') }}>
-				<span style="padding-left: 390px;"><b>Signature</b></span>
-			</span>
+			
+				<span ><b>Student Signature</b></span>  
+			
+				<span class="signa">
+					<img src={{ asset('img/sign.jpg') }}>
+					<span style="padding-left: 390px;"><b>Signature</b></span>
+				</span>
 		</div>
 	</div><!-- card -->
 
@@ -151,7 +154,7 @@
 		<a href="{{ route('admit-card.download', $data['admit_card']->roll_number) }}" type="button" class="btn btn-success" style="margin-left: 40%; text-decoration: none;">
 		<span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download PDF
 		</a>
-		<a href="{{ route('home') }}" type="button" class="btn btn-danger">Cancel</a>
+		<a href="{{ route('home') }}" type="button" class="btn btn-danger">Cancel</a> 
 	</div>
 
 @else
@@ -163,7 +166,7 @@
                     <h3 style="text-align: center;">You are not registered yet. So Please Register First.</h3>
                 </div>
 
-                <a href="{{ route('home') }}">
+                <a href="{{ route('home') }}"> 
                     <button style="margin-left: 40%;" type="btn btn-primary">Go Back</button>
                 </a>
             </div>
@@ -171,6 +174,6 @@
 	</div>
 
 @endif
-
+			
 </body>
 </html>

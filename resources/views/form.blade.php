@@ -178,7 +178,7 @@
                     <label for="payment-method-paypal"> <span><i class="fa fa-space-shuttle"></i>DBBL Rocket</span></label>
                 </div>
                 <div class="input-group input-group-icon">
-                    <input type="number" name="sender_no" placeholder=" Sent NO, Sender No, Txtid"/>
+                    <input type="number" name="sender_no" value="" placeholder=" Sent NO, Sender No, Txtid"/>
                     <div class="input-icon"><i class="fa fa-credit-card"></i></div>
                 </div>
                 <div class="col-half">
@@ -237,7 +237,7 @@
         $("#d_o_b").datepicker({
         changeMonth: true,
         changeYear: true,
-        yearRange: '2005:',
+        yearRange: '1985:2004',
         });
     })
   </script>

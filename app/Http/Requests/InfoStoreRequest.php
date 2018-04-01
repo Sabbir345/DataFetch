@@ -43,10 +43,7 @@ class InfoStoreRequest extends FormRequest
             'designation' => 'required',
             'passed_division' => 'required',
             'passed_year' => 'required',
-            'residential_status' => 'required',
-
-            'payment_type' => 'required',
-            'sender_no' => 'required',
+            'residential_status' => 'required'
         ];
     }
 

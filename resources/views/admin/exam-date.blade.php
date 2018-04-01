@@ -96,7 +96,7 @@
                 
       </div>
     </nav>
-    <!-- partial -->
+<!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <div class="row row-offcanvas row-offcanvas-right">
         <!-- partial:partials/_sidebar.html -->
@@ -110,12 +110,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#examdate" aria-expanded="false" aria-controls="examdate">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+              <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All General Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
-              <div class="collapse" id="examdate">
+              <div class="collapse" id="validationSubmenu">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('admin.general-students')}}">Student</a>
@@ -125,7 +125,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tablesSubmenu" aria-expanded="false" aria-controls="tablesSubmenu">
-                <i class="mdi mdi-table-large menu-icon"></i>
+                <i class="mdi mdi-table menu-icon"></i>
                 <span class="menu-title">All Registered Student</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
@@ -138,13 +138,12 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#validationSubmenu" aria-expanded="false" aria-controls="validationSubmenu">
-                <i class="mdi mdi-flag-outline menu-icon"></i>
+              <a class="nav-link" data-toggle="collapse" href="#examdate" aria-expanded="false" aria-controls="examdate">
+                <i class="mdi mdi-calendar-multiple menu-icon"></i>
                 <span class="menu-title">Exam Date</span>
                 <i class="mdi mdi-chevron-down menu-arrow"></i>
               </a>
-
-              <div class="collapse" id="validationSubmenu">
+              <div class="collapse" id="examdate">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('exam-dates')}}">Student</a>
@@ -152,7 +151,6 @@
                 </ul>
               </div>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="{{route('admin.showPasswordChangeMenu')}}">
                 <i class="mdi mdi-security menu-icon"></i>

@@ -112,7 +112,7 @@
             <img src="{{ $data['admit_card']->avatar }}">
         </div>
     </div><!-- head -->
-
+    
     <div class="classdate">
         <span style="padding-right: 5px;"><b>Class:</b> Sadis</span>
         <span><b>Year:</b> {{ $data['year'] }}/1439</span>
@@ -125,9 +125,10 @@
     </div><!-- title -->
 
     <br><br>
-
+    
     <div class="content">
             <div class="co1">
+
                 <p><b>Reg No:</b>{{ $data['admit_card']->roll_number }}</p>
                 <p><b>Name:</b> {{ $data['admit_card']->name }}</p>
                 @if(isset($data['residential_status']) && !empty($data['residential_status']))
@@ -138,23 +139,23 @@
                 @endif
             </div>
             <div class="co2">
-				<p><b>Roll No:</b> {{ $data['registration_id'] }}</p>
+                <p><b>Roll No:</b></p>
                 <p><b>Father Name:</b> {{ $data['admit_card']->father_name}} </p>
                 <p><b>Student Type:</b> {{ $data['student_type'] }}</p>
+                <p><b>Exam Date:</b></p>
                 @if(isset($data['exam_date']) && !empty($data['exam_date']))
                     <p><b>Exam Date</b> {{ $data['exam_date'] }}</p>
                 @endif
-
+                
             </div>
         </div><!-- content -->
-
         <div class="signature">
-			<span ><b>Student Signature</b></span>
-			<span class="signa">
-				<img src={{ asset('img/sign.jpg') }}>
-				<span style="padding-left: 390px;"><b>Signature</b></span>
-			</span>
-		</div>
+                <span ><b>Student Signature</b></span>  
+                <span class="signa">
+                    <img src={{ asset('img/sign.jpg') }}>
+                    <span style="padding-left: 390px;"><b>Signature</b></span>
+                </span>
+        </div>
 </div><!-- card -->
 
 </body>
