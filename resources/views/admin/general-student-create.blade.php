@@ -177,7 +177,7 @@
                 @endif
                   <form class="forms-sample" method="post" action="{{route('admin.createGeneralStudent')}}">
                             <div class="form-group">
-                                  <label for="roll_number">Roll Number</label>
+                                  <label for="roll_number">Registration Number</label>
                                   <input type="number" name="roll_number" class="form-control p-input" required>
                              </div>
                             <div class="form-group">

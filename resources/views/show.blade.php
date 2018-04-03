@@ -119,7 +119,7 @@
 		<div class="content">
 			<div class="co1">
 
-				<p><b>Reg No:</b>{{ $data['registration_id'] }}</p>
+				<p><b>Reg No:</b>{{ $data['admit_card']->roll_number }}</p>
 				<p><b>Name:</b> {{ $data['admit_card']->name }}</p>
 				@if(isset($data['residential_status']) && !empty($data['residential_status']))
             	<p><b>Residential Status:</b> {{ $data['residential_status'] }}</p>

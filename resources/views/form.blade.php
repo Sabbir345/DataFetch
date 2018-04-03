@@ -15,8 +15,8 @@
             <form method="post" action="{{ route('admit-card') }}">
                 <input type="number" name="roll_number" v-model = "rollNumber" placeholder="Registration ID"/>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button style="margin-top: 15px;" @click.prevent="fetchStudentInfo">Submit</button>
-                <button type="submit" >Get Admit Card</button>
+                <button class="btn btn-success" style="margin-top: 15px;" @click.prevent="fetchStudentInfo">Submit</button>
+                <button class="btn btn-primary" style="margin-top: 15px;" type="submit" >Get Admit Card</button>
             </form>
         </div>
     </div>
@@ -32,7 +32,7 @@
                     <input type="text"
                            placeholder = "Full Name"
                            v-model="studentInfo.name"
-                           name="name"
+                           name="name" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -40,7 +40,7 @@
                     <input type="text"
                            placeholder="Father's Name"
                            v-model="studentInfo.father_name"
-                           name="father_name"
+                           name="father_name" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -48,7 +48,7 @@
                     <input type="text"
                            placeholder="Village"
                            v-model="studentInfo.village_name"
-                           name="village_name"
+                           name="village_name" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -56,7 +56,7 @@
                     <input type="text"
                            placeholder="Post Office"
                            v-model="studentInfo.post_office"
-                           name="post_office"
+                           name="post_office" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -64,7 +64,7 @@
                     <input type="text"
                            placeholder="Upozila"
                            v-model="studentInfo.upozilla_name"
-                           name="upozilla_name"
+                           name="upozilla_name" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -72,7 +72,7 @@
                     <input type="text"
                            placeholder="District"
                            v-model="studentInfo.district"
-                           name="district"
+                           name="district" readonly
                     />
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
@@ -118,6 +118,7 @@
                         <select name="profession">
                             <option value="Student" selected>Student</option>
                             <option value="Teacher">Teacher</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                 </div>

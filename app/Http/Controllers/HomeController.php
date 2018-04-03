@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function index()
     {
-    	return view('welcome');
+		return view('welcome');
     }
 
     public function getStudentInfo($rollNumber)
@@ -76,6 +76,7 @@ class HomeController extends Controller
 			}
 
 			$data = $this->getAdmitCardData($student->id);
+
 			return view('show')->with('data', $data);
 		}
 		
