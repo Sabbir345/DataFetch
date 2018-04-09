@@ -181,6 +181,14 @@
                                   <input type="text" name="father_name" value="{{ $data['father_name'] }}" class="form-control p-input" required>
                              </div>
                              <div class="form-group">
+                                  <label for="father_name">Home Phone Number</label>
+                                  <input type="text" name="phone_home" value="{{ $data['phone_home'] }}" class="form-control p-input" required>
+                             </div>
+                             <div class="form-group">
+                                  <label for="father_name">Personal Phone Number</label>
+                                  <input type="text" name="phone_personal" value="{{ $data['phone_personal'] }}" class="form-control p-input" required>
+                             </div>
+                             <div class="form-group">
                                   <label for="village_name">Village</label>
                                   <input type="text" name="village_name" value="{{ $data['village_name'] }}" class="form-control p-input" required>
                              </div>

@@ -30,7 +30,9 @@ class GeneralStudentEditRequest extends FormRequest
             'post_office' => 'required',
             'village_name' => 'required',
             'district' => 'required',
-            'upozilla_name' => 'required'
+            'upozilla_name' => 'required',
+            'phone_home'    => 'required',
+            'phone_personal' => 'required'
         ];
     }
 }

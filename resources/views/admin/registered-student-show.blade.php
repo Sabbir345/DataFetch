@@ -216,6 +216,15 @@
                                   <input type="text" name="sender_no" value="{{ isset($data['sender_no']) ? $data['sender_no'] : 'Not Found' }}"  class="form-control p-input" disabled>
                              </div>
                              <div class="form-group">
+                                  <label for="sender_no">Mobile Number (Personal)</label>
+                                  <input type="text" name="phone_home" value="{{ isset($data->student->phone_home) ? $data->student->phone_home : 'Not Found' }}"  class="form-control p-input" disabled>
+                             </div>
+                             <div class="form-group">
+                                  <label for="sender_no">Mobile Number (Home)</label>
+                                  <input type="text" name="phone_personal" value="{{ isset($data->student->phone_personal) ? $data->student->phone_personal : 'Not Found' }}"  class="form-control p-input" disabled>
+                             </div>
+
+                             <div class="form-group">
                                   <label for="sender_no">Registered at</label>
                                   <input type="text" name="sender_no" value="{{ $data['created_at'] }}"  class="form-control p-input" disabled>
                              </div>
