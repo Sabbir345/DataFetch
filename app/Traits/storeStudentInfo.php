@@ -42,10 +42,16 @@ trait storeStudentInfo {
         $registration = new RegistrationDetail;
 
         // Getting how many students are available of this type
-        $particularTypeStudent = $registration->where('student_type', $data['student_type'])->get();
-        $registrationIdofThisStudent = $particularTypeStudent->count();
+        $particularStudent = $registration->where('student_type', $data['student_type'])->max('registration_id');
+        if(! $particularStudent) {
+            $data['registration_id'] = 1;
+        } else {
+            $data['registration_id'] = $particularStudent+1;
+        }
+        // $particularTypeStudent = $registration->where('student_type', $data['student_type'])->get();
+        // $registrationIdofThisStudent = $particularTypeStudent->count();
 
-        $data['registration_id'] = $registrationIdofThisStudent+1; // attaching roll number for that student
+        // $data['registration_id'] = $registrationIdofThisStudent+1; // attaching roll number for that student
 
         $registration->fill(
            $data->only($this->registrationData)
