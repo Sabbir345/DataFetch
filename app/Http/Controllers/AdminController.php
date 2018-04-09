@@ -186,6 +186,8 @@ class AdminController extends Controller
         $student->village_name = $request->village_name;
         $student->district = $request->district;
         $student->upozilla_name = $request->upozilla_name;
+        $student->phone_home = $request->phone_home;
+        $student->phone_personal = $request->phone_personal;
 
         $student->save();
 
